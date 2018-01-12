@@ -44,11 +44,9 @@ public class XBoxDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	double forward, turn, leftSpeed, rightSpeed;
-    	forward = -Robot.oi.getLeftJoystick().getRawAxis(1);
-    	turn = Robot.oi.getLeftJoystick().getRawAxis(4);
-    	leftSpeed = (forward + turn) / 2;
-    	rightSpeed = (forward - turn) / 2;
+    	double leftSpeed, rightSpeed;
+    	leftSpeed = -Robot.oi.getLeftJoystick().getRawAxis(1);
+    	rightSpeed = -Robot.oi.getLeftJoystick().getRawAxis(3);
     	
     	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
