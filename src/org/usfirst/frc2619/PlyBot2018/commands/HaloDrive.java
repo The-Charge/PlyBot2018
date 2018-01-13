@@ -46,8 +46,36 @@ public class HaloDrive extends Command {
     	double rightSpeed, leftSpeed, straight, lookSideToSide;
     	straight = -Robot.oi.leftJoystick.getRawAxis(1);
     	lookSideToSide = Robot.oi.leftJoystick.getRawAxis(4);
-    	leftSpeed = (straight + lookSideToSide)/2;
-    	rightSpeed = (straight - lookSideToSide)/2;
+    	if (straight > 0.0)
+    	{
+    		if (lookSideToSide > 0.0)
+    		{
+    			leftSpeed = straight - lookSideToSide; 
+    			rightSpeed = Math.max(straight, lookSideToSide);
+    		}
+    		else
+    		{
+    			leftSpeed = Math.max(-straight, lookSideToSide);
+    			rightSpeed = straight + lookSideToSide; 
+    			
+    		}
+    	}
+    	else 
+    	{
+    		if(lookSideToSide > 0.0)
+    		{
+    			leftSpeed = -Math.max(straight, lookSideToSide);
+    			rightSpeed = straight + lookSideToSide; 
+    		}
+    		else
+    		{
+    			leftSpeed = straight - lookSideToSide; 
+    			rightSpeed = -Math.max(-straight,-lookSideToSide);
+    		}
+    	}
+    	
+    	//leftSpeed = (straight + lookSideToSide)/2;
+    	//rightSpeed = (straight - lookSideToSide)/2;
     	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
 
