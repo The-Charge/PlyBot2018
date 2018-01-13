@@ -45,39 +45,28 @@ public class DroneDrive extends Command {
     protected void execute() {
     	double forward, turn, leftSpeed, rightSpeed;
     	forward = -Robot.oi.leftJoystick.getRawAxis(5);
-    	turn = Robot.oi.leftJoystick.getRawAxis(1);
-    	//leftSpeed = (forward + turn)/2;
-    	//rightSpeed = (forward - turn)/2;
-    	
-    	if (forward > 0.0)
-    	{
-    		if (turn > 0.0)
-    		{
+    	turn = Robot.oi.leftJoystick.getRawAxis(0);
+    	if (turn > 0) {
+    		if (forward < 0) {
+    			leftSpeed = Math.max(-forward, turn);
+    			rightSpeed = -(forward + turn);
+    		}
+    		else {
+    			leftSpeed = -Math.max(forward, turn);
+    			rightSpeed = -(forward - turn);
+    		}
+    	}
+    	else {
+    		if (forward < 0) {
+    			rightSpeed = Math.max(-forward, -turn);
     			leftSpeed = forward - turn;
-    			rightSpeed = Math.max(forward,turn);
     		}
-    		else 
-    		{
-    			leftSpeed = Math.max(forward, -turn);
-    			rightSpeed = forward + turn; 
+    		else {
+    			rightSpeed = -Math.max(forward, -turn);
+    			leftSpeed = -(forward + turn);
     		}
     	}
-    	else 
-    	{
-    		if(forward > 0.0)
-    		{
-    			leftSpeed = -Math.max(-forward, turn);
-    			rightSpeed = forward + turn; 
-    		}
-    		else
-    		{
-    			leftSpeed = forward - turn; 
-    			rightSpeed = -Math.max(-forward, -turn); 
-    		}
-    	}
-    
-    	
-    	Robot.driveTrain.run(leftSpeed, rightSpeed);
+    	Robot.driveTrain.run(-leftSpeed,-rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
