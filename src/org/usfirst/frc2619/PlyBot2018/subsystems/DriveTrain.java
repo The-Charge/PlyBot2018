@@ -66,5 +66,10 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("Encoder Position Left", leftFrontMotor.getSelectedSensorPosition(0));
     	SmartDashboard.putNumber("Encoder Position Right", rightFrontMotor.getSelectedSensorPosition(0));
     }
+    
+    public void stop() {
+    	leftFrontMotor.set(0);
+    	rightFrontMotor.set(0);
+    }
 }
 
