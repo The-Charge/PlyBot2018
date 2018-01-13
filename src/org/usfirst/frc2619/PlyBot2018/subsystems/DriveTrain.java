@@ -57,6 +57,10 @@ public class DriveTrain extends Subsystem {
         // Put code here to be run every loop
 
     }
+    
+    public double getPot() {
+    	return pot.get();
+    }
 
     public void run(double leftSpeed, double rightSpeed) {
     	leftFrontMotor.set(leftSpeed);
