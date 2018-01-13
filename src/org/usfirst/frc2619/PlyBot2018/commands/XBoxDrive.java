@@ -46,7 +46,7 @@ public class XBoxDrive extends Command {
     protected void execute() {
     	double leftSpeed, rightSpeed;
     	leftSpeed = -Robot.oi.getLeftJoystick().getRawAxis(1);
-    	rightSpeed = -Robot.oi.getLeftJoystick().getRawAxis(3);
+    	rightSpeed = -Robot.oi.getLeftJoystick().getRawAxis(5);
     	
     	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }

@@ -56,7 +56,7 @@ public class DriveTrain extends Subsystem {
 
     public void run(double leftSpeed, double rightSpeed) {
     	leftFrontMotor.set(leftSpeed);
-    	rightFrontMotor.set(rightSpeed);
+    	rightFrontMotor.set(-rightSpeed);
     }
 }
 
