@@ -43,39 +43,29 @@ public class HaloDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	double rightSpeed, leftSpeed, straight, lookSideToSide;
-    	straight = -Robot.oi.leftJoystick.getRawAxis(1);
-    	lookSideToSide = Robot.oi.leftJoystick.getRawAxis(4);
-    	if (straight > 0.0)
-    	{
-    		if (lookSideToSide > 0.0)
-    		{
-    			leftSpeed = straight + lookSideToSide; 
-    			rightSpeed = -Math.max(straight, lookSideToSide);
+    	double rightSpeed, leftSpeed, forward, turn;
+    	forward = Robot.oi.leftJoystick.getRawAxis(1);
+    	turn = Robot.oi.leftJoystick.getRawAxis(4);
+    	if (turn > 0) {
+    		if (forward < 0) {
+    			leftSpeed = Math.max(-forward, turn);
+    			rightSpeed = -(forward + turn);
     		}
-    		else
-    		{
-    			leftSpeed = -Math.max(-straight, lookSideToSide);
-    			rightSpeed = straight - lookSideToSide; 
-    			
+    		else {
+    			leftSpeed = -Math.max(forward, turn);
+    			rightSpeed = -(forward - turn);
     		}
     	}
-    	else 
-    	{
-    		if(lookSideToSide > 0.0)
-    		{
-    			leftSpeed = Math.max(-straight, lookSideToSide);
-    			rightSpeed = straight - lookSideToSide; 
+    	else {
+    		if (forward < 0) {
+    			rightSpeed = Math.max(-forward, -turn);
+    			leftSpeed = forward - turn;
     		}
-    		else
-    		{
-    			leftSpeed = straight + lookSideToSide; 
-    			rightSpeed = Math.max(-straight,-lookSideToSide);
+    		else {
+    			rightSpeed = -Math.max(forward, -turn);
+    			leftSpeed = -(forward + turn);
     		}
     	}
-    	
-    	//leftSpeed = (straight + lookSideToSide)/2;
-    	//rightSpeed = (straight - lookSideToSide)/2;
     	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
 
