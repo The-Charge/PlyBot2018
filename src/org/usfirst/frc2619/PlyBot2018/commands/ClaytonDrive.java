@@ -46,8 +46,36 @@ public class ClaytonDrive extends Command {
     	double forward, turn, leftSpeed, rightSpeed;
     	forward = -Robot.oi.leftJoystick.getY();
     	turn = Robot.oi.leftJoystick.getTwist();
-    	leftSpeed = (forward + turn)/2;
-    	rightSpeed = (forward - turn)/2;
+    	//leftSpeed = (forward + turn)/2;
+    	//rightSpeed = (forward - turn)/2;
+    	
+    	if (forward > 0.0)
+    	{
+    		if (turn > 0.0)
+    		{
+    			leftSpeed = forward - turn; 
+    			rightSpeed = Math.max(forward, turn); 
+    		}
+    		else 
+    		{
+    			leftSpeed = Math.max(forward, -turn);
+    			rightSpeed = forward + turn; 
+    		}
+    	}
+    	else 
+    	{
+    		if (turn > 0.0)
+    		{
+    			leftSpeed = -Math.max(-forward, turn);
+    			rightSpeed = forward + turn; 
+    		}
+    		else
+    		{
+    			leftSpeed = forward - turn; 
+    			rightSpeed = -Math.max(-forward, -turn); 
+    		}
+    	}
+    	
     	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
 
