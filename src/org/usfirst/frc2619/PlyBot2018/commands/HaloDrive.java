@@ -50,13 +50,13 @@ public class HaloDrive extends Command {
     	{
     		if (lookSideToSide > 0.0)
     		{
-    			leftSpeed = straight - lookSideToSide; 
-    			rightSpeed = Math.max(straight, lookSideToSide);
+    			leftSpeed = straight + lookSideToSide; 
+    			rightSpeed = -Math.max(straight, lookSideToSide);
     		}
     		else
     		{
-    			leftSpeed = Math.max(-straight, lookSideToSide);
-    			rightSpeed = straight + lookSideToSide; 
+    			leftSpeed = -Math.max(-straight, lookSideToSide);
+    			rightSpeed = straight - lookSideToSide; 
     			
     		}
     	}
@@ -64,13 +64,13 @@ public class HaloDrive extends Command {
     	{
     		if(lookSideToSide > 0.0)
     		{
-    			leftSpeed = -Math.max(straight, lookSideToSide);
-    			rightSpeed = straight + lookSideToSide; 
+    			leftSpeed = Math.max(-straight, lookSideToSide);
+    			rightSpeed = straight - lookSideToSide; 
     		}
     		else
     		{
-    			leftSpeed = straight - lookSideToSide; 
-    			rightSpeed = -Math.max(-straight,-lookSideToSide);
+    			leftSpeed = straight + lookSideToSide; 
+    			rightSpeed = Math.max(-straight,-lookSideToSide);
     		}
     	}
     	
