@@ -45,38 +45,28 @@ public class ClaytonDrive extends Command {
     protected void execute() {
     	double forward, turn, leftSpeed, rightSpeed;
     	forward = -Robot.oi.leftJoystick.getY();
-    	turn = Robot.oi.leftJoystick.getTwist();
-    	//leftSpeed = (forward + turn)/2;
-    	//rightSpeed = (forward - turn)/2;
-    	
-    	if (forward > 0.0)
-    	{
-    		if (turn > 0.0)
-    		{
-    			leftSpeed = forward - turn; 
-    			rightSpeed = Math.max(forward, turn); 
+    	turn = Robot.oi.leftJoystick.getZ();
+    	if (turn > 0) {
+    		if (forward < 0) {
+    			leftSpeed = Math.max(-forward, turn);
+    			rightSpeed = -(forward + turn);
     		}
-    		else 
-    		{
-    			leftSpeed = Math.max(forward, -turn);
-    			rightSpeed = forward + turn; 
+    		else {
+    			leftSpeed = -Math.max(forward, turn);
+    			rightSpeed = -(forward - turn);
     		}
     	}
-    	else 
-    	{
-    		if (turn > 0.0)
-    		{
-    			leftSpeed = -Math.max(-forward, turn);
-    			rightSpeed = forward + turn; 
+    	else {
+    		if (forward < 0) {
+    			rightSpeed = Math.max(-forward, -turn);
+    			leftSpeed = forward - turn;
     		}
-    		else
-    		{
-    			leftSpeed = forward - turn; 
-    			rightSpeed = -Math.max(-forward, -turn); 
+    		else {
+    			rightSpeed = -Math.max(forward, -turn);
+    			leftSpeed = -(forward + turn);
     		}
     	}
-    	
-    	Robot.driveTrain.run(leftSpeed, rightSpeed);
+    	Robot.driveTrain.run(-leftSpeed, -rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
