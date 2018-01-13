@@ -45,11 +45,11 @@ public class ArcadeDrive extends Command {
     @Override
     protected void execute() {
     	double forward, turn, leftSpeed, rightSpeed;
-    	forward = -robot.oi.leftJoystick.getY;
-    	turn = robot.io.leftJoystick.getX;
-    	leftSpeed = forward + turn;
-    	rightSpeed = forward - turn;
-    	Robot.driveTrain.run(leftSpeed, rightSpeed)
+    	forward = -Robot.oi.leftJoystick.getY();
+    	turn = Robot.oi.leftJoystick.getX();
+    	leftSpeed = (forward + turn)/2;
+    	rightSpeed = (forward - turn)/2;
+    	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -61,12 +61,13 @@ public class ArcadeDrive extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    	Robot.driveTrain.
+    	Robot.driveTrain.run(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+    	end();
     }
 }
