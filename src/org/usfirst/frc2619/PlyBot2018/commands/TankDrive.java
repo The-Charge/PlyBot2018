@@ -48,9 +48,9 @@ public class TankDrive extends Command {
     	leftSpeed = Robot.oi.leftJoystick.getY();
     	//---------------------------------------------
     	//Deadband
-    	if (rightSpeed >= 0.1 || rightSpeed <= -0.1)
+    	if (rightSpeed <= 0.1 && rightSpeed >= -0.1)
     		rightSpeed = 0;
-    	if (leftSpeed >= 0.1 || leftSpeed <= -0.1)
+    	if (leftSpeed <= 0.1 && leftSpeed >= -0.1)
     		leftSpeed = 0;
     	//----------------------------------------------
     	//Delinearization
