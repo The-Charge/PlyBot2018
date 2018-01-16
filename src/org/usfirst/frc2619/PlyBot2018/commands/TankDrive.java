@@ -48,17 +48,17 @@ public class TankDrive extends Command {
     	SmartDashboard.putNumber("Current Time", System.currentTimeMillis());
     	double rightSpeed, leftSpeed;
     	rightSpeed = -Robot.oi.rightJoystick.getY();
-    	leftSpeed = Robot.oi.leftJoystick.getY();
+    	leftSpeed = -Robot.oi.leftJoystick.getY();
     	//---------------------------------------------
     	//Deadband
-    	if (rightSpeed <= 0.1 && rightSpeed >= -0.1)
+    	if (Math.abs(rightSpeed) <= 0.1)
     		rightSpeed = 0;
-    	if (leftSpeed <= 0.1 && leftSpeed >= -0.1)
+    	if (Math.abs(leftSpeed) <= 0.1)
     		leftSpeed = 0;
     	//----------------------------------------------
     	//Delinearization
-    	rightSpeed = java.lang.Math.pow(rightSpeed, 3);
-    	leftSpeed = java.lang.Math.pow(leftSpeed, 3);
+    	rightSpeed = Math.pow(rightSpeed, 3);
+    	leftSpeed = Math.pow(leftSpeed, 3);
     	//----------------------------------------------
     	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
