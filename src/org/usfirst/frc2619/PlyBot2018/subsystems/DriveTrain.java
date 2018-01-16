@@ -59,5 +59,10 @@ public class DriveTrain extends Subsystem {
     	leftFrontMotor.set(leftSpeed);
     	rightFrontMotor.set(-rightSpeed);
     }
+    
+    public void stop() {
+    	leftFrontMotor.set(0);
+    	rightFrontMotor.set(0);
+    }
 }
 
