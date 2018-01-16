@@ -11,6 +11,7 @@
 
 package org.usfirst.frc2619.PlyBot2018.subsystems;
 
+import org.usfirst.frc2619.PlyBot2018.Robot;
 import org.usfirst.frc2619.PlyBot2018.RobotMap;
 import org.usfirst.frc2619.PlyBot2018.commands.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -56,7 +57,11 @@ public class DriveTrain extends Subsystem {
 
     public void run(double leftSpeed, double rightSpeed) {
     	leftFrontMotor.set(leftSpeed);
-    	rightFrontMotor.set(rightSpeed);
+    	rightFrontMotor.set(-rightSpeed);
+    }
+    
+    public void end() {
+        Robot.driveTrain.run(0, 0);
     }
 }
 

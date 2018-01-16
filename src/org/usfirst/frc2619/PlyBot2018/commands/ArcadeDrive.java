@@ -46,10 +46,28 @@ public class ArcadeDrive extends Command {
     protected void execute() {
     	double forward, turn, leftSpeed, rightSpeed;
     	forward = -Robot.oi.leftJoystick.getY();
-    	turn = Robot.oi.leftJoystick.getX();
-    	leftSpeed = (forward + turn)/2;
-    	rightSpeed = (forward - turn)/2;
-    	Robot.driveTrain.run(leftSpeed, rightSpeed);
+    	turn = -Robot.oi.leftJoystick.getX();
+        if (forward > 0.0) {
+            if (turn > 0.0) {
+              leftSpeed = forward - turn;
+              rightSpeed = Math.max(forward, turn);
+            } 
+            else {
+              leftSpeed = Math.max(forward, -turn);
+              rightSpeed = forward + turn;
+            }
+        } 
+        else {
+            if (turn > 0.0) {
+              rightSpeed = -Math.max(-forward, turn);
+              leftSpeed = forward + turn;
+            } 
+            else {
+              rightSpeed = forward - turn;
+              leftSpeed = -Math.max(-forward, -turn);
+            }
+        }
+        Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -61,7 +79,7 @@ public class ArcadeDrive extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    	Robot.driveTrain.run(0, 0);
+    	Robot.driveTrain.end();
     }
 
     // Called when another command which requires one or more of the same
