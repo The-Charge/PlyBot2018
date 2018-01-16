@@ -49,6 +49,17 @@ public class TankDrive extends Command {
     	double rightSpeed, leftSpeed;
     	rightSpeed = -Robot.oi.rightJoystick.getY();
     	leftSpeed = -Robot.oi.leftJoystick.getY();
+    	//---------------------------------------------
+    	//Deadband
+    	if (Math.abs(rightSpeed) <= 0.1)
+    		rightSpeed = 0;
+    	if (Math.abs(leftSpeed) <= 0.1)
+    		leftSpeed = 0;
+    	//----------------------------------------------
+    	//Delinearization
+    	rightSpeed = Math.pow(rightSpeed, 3);
+    	leftSpeed = Math.pow(leftSpeed, 3);
+    	//----------------------------------------------
     	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
 
