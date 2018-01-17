@@ -83,7 +83,9 @@ public class TurnNDegreesRelative extends Command {
     @Override
     protected boolean isFinished() {
     	final double ERROR = 5;
-    	
+    	if (initial == 0) {
+    		initial = 360;
+    	}
     	if (Math.abs(Math.abs(current)-Math.abs(initial)) < m_nDegrees + ERROR && Math.abs(Math.abs(current)-Math.abs(initial)) > m_nDegrees - ERROR)
     		return false;
     	else
