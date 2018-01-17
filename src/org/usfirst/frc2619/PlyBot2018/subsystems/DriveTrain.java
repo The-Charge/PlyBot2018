@@ -14,6 +14,7 @@ package org.usfirst.frc2619.PlyBot2018.subsystems;
 import org.usfirst.frc2619.PlyBot2018.RobotMap;
 import org.usfirst.frc2619.PlyBot2018.commands.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -50,6 +51,7 @@ public class DriveTrain extends Subsystem {
     public int MotionMagicVelocity = 6000;
     public int MotionMagicPIDIndex = 0;
     public int MotionMagicPIDSlot = 0;
+    public double MotionMagicDistance;
     
     public final double TIMEOUT = 0.002;
     @Override
@@ -75,8 +77,9 @@ public class DriveTrain extends Subsystem {
     }
     
     public void MotionMagicInit(double distance) {
-    	leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
-    	rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
+    	MotionMagicDistance = distance;
+    	leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
+    	rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
     	
     	leftFrontMotor.selectProfileSlot(MotionMagicPIDSlot, MotionMagicPIDIndex);
     	rightFrontMotor.selectProfileSlot(MotionMagicPIDSlot, MotionMagicPIDIndex);
@@ -100,14 +103,14 @@ public class DriveTrain extends Subsystem {
     	leftFrontMotor.setSelectedSensorPosition(0, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
     	rightFrontMotor.setSelectedSensorPosition(0, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
     	
-    	double distanceTicks = distance * TICKS_PER_FOOT;
-    	leftFrontMotor.set(ControlMode.MotionMagic, distanceTicks);
-    	rightFrontMotor.set(ControlMode.MotionMagic, -distanceTicks);
+    	MotionMagicDistance *= TICKS_PER_FOOT;
+    	leftFrontMotor.set(ControlMode.MotionMagic, MotionMagicDistance);
+    	rightFrontMotor.set(ControlMode.MotionMagic, -MotionMagicDistance);
     }
     
     public boolean isAtPIDDestination() {
-		return (this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) > 1000 || this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) < -1000)
-				&& (Math.abs(this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) - this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex)) < 1000);
+		return (this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) > MotionMagicDistance - 6000 || this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) < -MotionMagicDistance + 6000)
+				&& (Math.abs(this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) - this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex)) < MotionMagicDistance-6000);
 	}
     
     public void setPercentVBus() {
@@ -115,5 +118,13 @@ public class DriveTrain extends Subsystem {
     	rightFrontMotor.set(ControlMode.PercentOutput, 0);
     }
     
+    public void writeDashboardValues() {
+    	SmartDashboard.putNumber("PreZero", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
+    	SmartDashboard.putNumber("Distance", MotionMagicDistance);
+    	SmartDashboard.putNumber("PostZero", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
+    	SmartDashboard.putNumber("PostRun", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
+    	SmartDashboard.putString("Control Mode", leftFrontMotor.getControlMode().toString());
+    	SmartDashboard.putBoolean("isFinished", isAtPIDDestination());
+    }
 }
 
