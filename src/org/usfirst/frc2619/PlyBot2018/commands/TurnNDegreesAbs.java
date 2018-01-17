@@ -9,7 +9,7 @@
 // it from being updated in the future.
 
 
-package org.usfirst.frc2619.PlyBot2018.commands;
+package src.org.usfirst.frc2619.PlyBot2018.commands;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2619.PlyBot2018.Robot;
@@ -64,7 +64,12 @@ public class TurnNDegreesAbs extends Command {
     	return isTimedOut() || done;
     }
 
-    // Called once after isFinished returns true
+    private boolean isTimedOut() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	// Called once after isFinished returns true
     @Override
     protected void end() {
     	Robot.driveTrain.run(0,0);
