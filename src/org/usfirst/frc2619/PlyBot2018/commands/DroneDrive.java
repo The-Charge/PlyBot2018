@@ -58,12 +58,12 @@ public class DroneDrive extends Command {
         } 
         else {
             if (turn > 0.0) {
-              rightSpeed = -Math.max(-forward, turn);
-              leftSpeed = forward + turn;
+              leftSpeed = -Math.max(-forward, turn);
+              rightSpeed = forward + turn;
             } 
             else {
-              rightSpeed = forward - turn;
-              leftSpeed = -Math.max(-forward, -turn);
+              leftSpeed = forward - turn;
+              rightSpeed = -Math.max(-forward, -turn);
             }
         }
         Robot.driveTrain.run(leftSpeed, rightSpeed);
