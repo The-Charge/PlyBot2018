@@ -64,7 +64,7 @@ public class DriveTrain extends Subsystem {
     	invertRun(leftSpeed, rightSpeed, false);
     }
     
-    public void invertRun(double leftSpeed, double rightSpeed, boolean invert) {
+    public void invertRun(double leftSpeed, double rightSpeed) {
     	if (Robot.oi.rightJoystick.getRawButton(1)) {
     		leftSpeed*=-1;
     		rightSpeed*=-1;
