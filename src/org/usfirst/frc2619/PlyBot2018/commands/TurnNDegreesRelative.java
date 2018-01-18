@@ -11,6 +11,7 @@
 
 package org.usfirst.frc2619.PlyBot2018.commands;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc2619.PlyBot2018.MathUtil;
 import org.usfirst.frc2619.PlyBot2018.Robot;
@@ -41,6 +42,8 @@ public class TurnNDegreesRelative  extends Command {
     	if (finalyaw == 360) {
     		finalyaw = 0;
     	}
+    	
+    	this.setTimeout(3);
     }
     
     public TurnNDegreesRelative(double nDegrees) {
@@ -65,14 +68,18 @@ public class TurnNDegreesRelative  extends Command {
     protected void execute() {
     	current = Robot.driveTrain.getYaw();
     	direction = MathUtil.calcDirection(current, finalyaw);
+    	SmartDashboard.putNumber("Current Yaw", current);
+    	SmartDashboard.putNumber("Final Yaw" , finalyaw);
+    	SmartDashboard.putNumber("Direction" , direction);
+    	
     	run();
     }
     
     private void run() {
-    	final double TURNSPEED = .4;
+    	final double TURNSPEED = .75;
     	double dir = 0;
     	
-    	//when direction changes (different from local dir), run() again to change turning direction.
+    	//when direction  (different from local dir), run() again to change turning direction.
     	//prevents it from going in circles when it overshoots.
     	if (direction != dir) {
     		dir = direction;
@@ -90,11 +97,7 @@ public class TurnNDegreesRelative  extends Command {
     protected boolean isFinished() {
     	final double ERROR = 5;
     	
-    	if (Math.abs(Math.abs(current)-Math.abs(finalyaw)) < ERROR) {
-    		return true;
-    	}
-    	else
-    		return false;
+    	return (Math.abs(Math.abs(current)-Math.abs(finalyaw)) < ERROR || this.isTimedOut());
     	
     }
 
