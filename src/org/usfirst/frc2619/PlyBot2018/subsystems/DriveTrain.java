@@ -61,18 +61,8 @@ public class DriveTrain extends Subsystem {
     }
 
     public void run(double leftSpeed, double rightSpeed) {
-    	invertRun(leftSpeed, rightSpeed, false);
-    }
-    
-    public void invertRun(double leftSpeed, double rightSpeed, boolean invert) {
-    	if (invert) {
-    		leftSpeed*=-1;
-    		rightSpeed*=-1;
-    	}
-    	
-	    leftFrontMotor.set(leftSpeed);
-	    rightFrontMotor.set(-rightSpeed);
-
+    	leftFrontMotor.set(leftSpeed);
+    	rightFrontMotor.set(-rightSpeed);
     	SmartDashboard.putNumber("Encoder", pot.get());
     	SmartDashboard.putNumber("Encoder Position Left", leftFrontMotor.getSelectedSensorPosition(0));
     	SmartDashboard.putNumber("Encoder Position Right", rightFrontMotor.getSelectedSensorPosition(0));
