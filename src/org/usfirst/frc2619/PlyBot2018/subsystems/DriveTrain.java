@@ -77,10 +77,6 @@ public class DriveTrain extends Subsystem {
 
     }
     
-    public void stop() {
-    	run(0, 0);
-    }
-    
     public void zeroYaw() {
     	RobotMap.driveTrainAHRS.zeroYaw();
     }
