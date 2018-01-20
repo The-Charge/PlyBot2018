@@ -61,22 +61,20 @@ public class DriveTrain extends Subsystem {
     }
 
     public void run(double leftSpeed, double rightSpeed) {
-    	invertRun(leftSpeed, rightSpeed);
-    }
-    
-    public void invertRun(double leftSpeed, double rightSpeed) {
-    	if (Robot.oi.rightJoystick.getRawButton(1)) {
-    		leftSpeed*=-1;
-    		rightSpeed*=-1;
+    	if (isReversed) {
+    		leftFrontMotor.set(-leftSpeed);
+    	    rightFrontMotor.set(rightSpeed);
+    	}
+    	else {
+    		leftFrontMotor.set(leftSpeed);
+    	    rightFrontMotor.set(-rightSpeed);
     	}
     	
-	    leftFrontMotor.set(leftSpeed);
-	    rightFrontMotor.set(-rightSpeed);
-
     	SmartDashboard.putNumber("Encoder", pot.get());
     	SmartDashboard.putNumber("Encoder Position Left", leftFrontMotor.getSelectedSensorPosition(0));
     	SmartDashboard.putNumber("Encoder Position Right", rightFrontMotor.getSelectedSensorPosition(0));
     }
+    
     
     public void stop() {
     	leftFrontMotor.set(0);
