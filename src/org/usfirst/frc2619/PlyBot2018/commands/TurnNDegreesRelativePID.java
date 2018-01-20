@@ -70,13 +70,13 @@ public class TurnNDegreesRelativePID extends PIDCommand {
         // e.g. yourMotor.set(output);
     	
     	int sign = (int) Math.signum(output);
-    	double minSpeed = .15;
+    	double minSpeed = 1;
     	double finalOutput = sign * (Math.max(minSpeed, Math.abs(output)));
     	//if pid output is lower than minSpeed, set it to minSpeed
 
         RobotMap.driveTrainLeftFrontMotor.pidWrite(finalOutput);
-        RobotMap.driveTrainLeftFrontMotor.pidWrite(-finalOutput);
-
+        RobotMap.driveTrainRightFrontMotor.pidWrite(finalOutput);
+        //PIDContoller automatically finds the shortest angle to setpoint
     }
 
     // Called just before this Command runs the first time
@@ -85,7 +85,9 @@ public class TurnNDegreesRelativePID extends PIDCommand {
     	this.setTimeout(3);
     	previousControlMode = Robot.driveTrain.getControlMode();
 		initial = RobotMap.driveTrainAHRS.getAngle();
-		RobotMap.driveTrainAHRS.setAngleAdjustment(-initial);	//not sure what this is for
+		RobotMap.driveTrainAHRS.setAngleAdjustment(-initial);
+		//^^^ I think this essentially sets initial angle to 0; whenever it returns the current angle,
+		//it adds -initial to it, then resets it when the turn is finished.
 		getPIDController().setSetpoint(m_nDegrees);
 		Robot.driveTrain.setControlMode(ControlMode.PercentOutput);
     }
@@ -98,15 +100,15 @@ public class TurnNDegreesRelativePID extends PIDCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return isTimedOut() || getPIDController().onTarget();
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
     	Robot.driveTrain.stop();
-		//RobotMap.driveTrainAHRS.setAngleAdjustment(0);
-		//Robot.driveTrain.setControlMode(previousControlMode);
+		RobotMap.driveTrainAHRS.setAngleAdjustment(0);
+		Robot.driveTrain.setControlMode(previousControlMode);
     }
 
     // Called when another command which requires one or more of the same
