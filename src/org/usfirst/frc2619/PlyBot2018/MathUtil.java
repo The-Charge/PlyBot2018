@@ -34,13 +34,15 @@ public class MathUtil {
 	
 	public static double delin(double speed, double dead, double root, double pwr){
 		double evn = (pwr/root) % 2;
+		double invdB = Math.pow(1 - dead,-1);
+		double cons = pwr/root;
 		if (speed != 0) { //Makes sure deadband doesn't bypass the calculations
 			if (speed > 0) //Speed is greater than zero and so there are no exceptions
-				return Math.pow(Math.pow(1 - dead, -1) * (speed - dead), pwr/root);
+				return Math.pow(invdB * (speed - dead), cons);
 			else if (evn != 0) //Less than zero, checks for even power
-				return Math.pow(Math.pow(1 - dead, -1) * (speed + dead), pwr/root);
+				return Math.pow(invdB * (speed + dead), cons);
 			else //To stay negative, a "-" must be put at the beginning to maintain negativity of speed
-				return -Math.pow(Math.pow(1 - dead, -1) * (speed + dead), pwr/root);
+				return -Math.pow(invdB * (speed + dead), cons);
 		}
 		else return 0;
 	}//
