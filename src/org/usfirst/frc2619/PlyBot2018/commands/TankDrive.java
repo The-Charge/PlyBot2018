@@ -13,6 +13,7 @@ package org.usfirst.frc2619.PlyBot2018.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc2619.PlyBot2018.MathUtil;
 import org.usfirst.frc2619.PlyBot2018.Robot;
 
 /**
@@ -49,17 +50,8 @@ public class TankDrive extends Command {
     	double rightSpeed, leftSpeed;
     	rightSpeed = -Robot.oi.rightJoystick.getY();
     	leftSpeed = -Robot.oi.leftJoystick.getY();
-    	//---------------------------------------------
-    	//Deadband
-    	if (Math.abs(rightSpeed) <= 0.1)
-    		rightSpeed = 0;
-    	if (Math.abs(leftSpeed) <= 0.1)
-    		leftSpeed = 0;
-    	//----------------------------------------------
-    	//Delinearization
-    	rightSpeed = Math.pow(rightSpeed, 3);
-    	leftSpeed = Math.pow(leftSpeed, 3);
-    	//----------------------------------------------
+    	rightSpeed = MathUtil.adjSpeed(rightSpeed);
+    	leftSpeed = MathUtil.adjSpeed(leftSpeed);
     	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
 

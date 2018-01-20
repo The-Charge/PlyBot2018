@@ -15,4 +15,30 @@ public class MathUtil {
 		return direction;
 	}	//return +1 if direction is CW, -1 if CCW - copied from SteamBot
 		// 1 clockwise, -1 counterclockwise
+
+    public static double adjSpeed(double speed) {
+    	speed = MathUtil.deadband(speed, .1);
+    	speed = MathUtil.delin(speed, .1 , 1, 3);
+    	return speed;
+    }
+	
+	public static double deadband(double speed, double dead){
+		if (-dead < speed && speed < dead) 
+			return 0;
+		else
+			return speed;
+	}//checks if speed is inbetween -dB and +dB then it should be set to zero
+	
+	public static double delin(double speed, double dead, double root, double pwr){
+		double evn = (pwr/root) % 2;
+		if (speed != 0) { //Makes sure deadband doesn't bypass the calculations
+			if (speed > 0) //Speed is greater than zero and so there are no exceptions
+				return Math.pow(Math.pow(1 - dead, -1) * (speed - dead), pwr/root);
+			else if (evn != 0) //Less than zero, checks for even power
+				return Math.pow(Math.pow(1 - dead, -1) * (speed + dead), pwr/root);
+			else //To stay negative, a "-" must be put at the beginning to maintain negativity of speed
+				return -Math.pow(Math.pow(1 - dead, -1) * (speed + dead), pwr/root);
+		}
+		else return 0;
+	}
 }
