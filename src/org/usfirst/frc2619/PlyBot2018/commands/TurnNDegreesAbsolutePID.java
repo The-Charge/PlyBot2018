@@ -67,11 +67,11 @@ public class TurnNDegreesAbsolutePID extends PIDCommand {
         // e.g. yourMotor.set(output);
 
     	int sign = (int) Math.signum(output);
-		double minSpeed = 0.15;
+		double minSpeed = 1;
 		double finalOutput = sign * Math.max(minSpeed, Math.abs(output));
 
 		RobotMap.driveTrainLeftFrontMotor.pidWrite(finalOutput);
-		RobotMap.driveTrainRightFrontMotor.pidWrite(-finalOutput);
+		RobotMap.driveTrainRightFrontMotor.pidWrite(finalOutput);
     }
 
     // Called just before this Command runs the first time
