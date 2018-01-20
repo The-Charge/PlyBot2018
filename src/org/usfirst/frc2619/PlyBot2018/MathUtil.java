@@ -4,7 +4,6 @@ import org.usfirst.frc2619.PlyBot2018.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MathUtil {
-
 	public static double calcDirection(double current, double desired) {
 		current = Math.toRadians(current);
 		desired = Math.toRadians(desired);
@@ -15,4 +14,5 @@ public class MathUtil {
 		double direction = Math.signum(current_x * desired_y - desired_x * current_y);
 		return direction;
 	}	//return +1 if direction is CW, -1 if CCW - copied from SteamBot
+		// 1 clockwise, -1 counterclockwise
 }
