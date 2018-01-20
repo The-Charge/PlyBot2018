@@ -39,7 +39,8 @@ public class DriveInverted extends Command {
     protected void initialize() {
     	if (Robot.driveTrain.isReversed) {
 			Robot.driveTrain.isReversed = false;
-		} else {
+		} 
+    	else {
 			Robot.driveTrain.isReversed = true;
 		}
     }
@@ -52,7 +53,7 @@ public class DriveInverted extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
@@ -64,5 +65,6 @@ public class DriveInverted extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+    	end();
     }
 }
