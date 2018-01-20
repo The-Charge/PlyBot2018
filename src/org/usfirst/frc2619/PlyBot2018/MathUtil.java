@@ -4,6 +4,7 @@ import org.usfirst.frc2619.PlyBot2018.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MathUtil {
+
 	public static double calcDirection(double current, double desired) {
 		current = Math.toRadians(current);
 		desired = Math.toRadians(desired);
@@ -14,11 +15,13 @@ public class MathUtil {
 		double direction = Math.signum(current_x * desired_y - desired_x * current_y);
 		return direction;
 	}	//return +1 if direction is CW, -1 if CCW - copied from SteamBot
-		// 1 clockwise, -1 counterclockwise
 
     public static double adjSpeed(double speed) {
-    	speed = MathUtil.deadband(speed, .1);
-    	speed = MathUtil.delin(speed, .1 , 1, 3);
+    	double dB = SmartDashboard.getNumber("Deadband", .1);
+    	double root = SmartDashboard.getNumber("Root", 1);
+    	double power = SmartDashboard.getNumber("Power", 3);
+    	speed = MathUtil.deadband(speed, dB);
+    	speed = MathUtil.delin(speed, dB , root, power);
     	return speed;
     }
 	
@@ -40,5 +43,5 @@ public class MathUtil {
 				return -Math.pow(Math.pow(1 - dead, -1) * (speed + dead), pwr/root);
 		}
 		else return 0;
-	}
+	}//
 }
