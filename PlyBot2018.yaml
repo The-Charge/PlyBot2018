@@ -49,10 +49,10 @@ Children:
     - Children: []
       Properties:
         Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
-          choices: ['0', '1', '2', '3', '4', '5', '6', '7']
+          choices: &id003 ['0', '1', '2', '3', '4', '5', '6', '7']
           default: '0'
           name: Input Channel (Analog)
-          validators: [AnalogInput]
+          validators: &id004 [AnalogInput]
           value: '0'
         Full Range: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: Full Range,
           validators: null, value: 1.0}
@@ -159,7 +159,7 @@ Children:
         default: 0
         name: Input
         type: PIDSource
-        validators: [ChildDropdownSelected]
+        validators: &id005 [ChildDropdownSelected]
         value: Elevator Encoder
       Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Send to SmartDashboard, validators: null, value: true}
@@ -169,7 +169,7 @@ Children:
         default: 0
         name: Output
         type: PIDOutput
-        validators: [ChildDropdownSelected]
+        validators: &id006 [ChildDropdownSelected]
         value: Elevator Talon
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Default Command, type: Command, validators: null, value: None}
@@ -177,6 +177,84 @@ Children:
         validators: null, value: 0.0}
     Base: PID Subsystem
     Name: Elevator
+  - Children:
+    - Children: []
+      Properties:
+        Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id003
+          default: '0'
+          name: Input Channel (Analog)
+          validators: *id004
+          value: '1'
+        Full Range: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: Full Range,
+          validators: null, value: 1.0}
+        Offset: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: Offset,
+          validators: null, value: 0.0}
+      Base: Analog Potentiometer
+      Name: Pot
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id001
+          default: '2'
+          name: CAN ID
+          validators: *id002
+          value: '6'
+      Base: Talon SRX
+      Name: Talon
+    Properties:
+      Limit Output: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Limit Output, validators: null, value: true}
+      D: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: D, validators: null,
+        value: 0.0}
+      Default command parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Default command parameters
+        validators: null
+        value: []
+      Continuous: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Continuous, validators: null, value: false}
+      F: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: F, validators: null,
+        value: 0.0}
+      Tolerance: !!robotbuilder.data.properties.DoubleProperty {default: 0.2, name: Tolerance,
+        validators: null, value: 0.05}
+      Constants: !!robotbuilder.data.properties.ConstantsProperty
+        default: []
+        name: Constants
+        validators: null
+        value: []
+      I: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: I, validators: null,
+        value: 0.0}
+      Minimum Input: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: Minimum Input,
+        validators: null, value: 0.0}
+      Limit Input: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Limit Input, validators: null, value: true}
+      Minimum Output: !!robotbuilder.data.properties.DoubleProperty {default: -1,
+        name: Minimum Output, validators: null, value: -1.0}
+      P: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: P, validators: null,
+        value: 1.0}
+      Input: !!robotbuilder.data.properties.ChildSelectionProperty
+        default: 0
+        name: Input
+        type: PIDSource
+        validators: *id005
+        value: Shoulder Pot
+      Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Send to SmartDashboard, validators: null, value: true}
+      Maximum Output: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: Maximum Output,
+        validators: null, value: 1.0}
+      Output: !!robotbuilder.data.properties.ChildSelectionProperty
+        default: 0
+        name: Output
+        type: PIDOutput
+        validators: *id006
+        value: Shoulder Talon
+      Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Default Command, type: Command, validators: null, value: None}
+      Maximum Input: !!robotbuilder.data.properties.DoubleProperty {default: 5, name: Maximum Input,
+        validators: null, value: 1.0}
+    Base: PID Subsystem
+    Name: Shoulder
   Properties: {}
   Base: Subsystems
   Name: Subsystems
@@ -184,20 +262,20 @@ Children:
   - Children: []
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
-        choices: &id003 ['0', '1', '2', '3', '4', '5']
+        choices: &id007 ['0', '1', '2', '3', '4', '5']
         default: 1
         name: Number
-        validators: &id004 [Joystick]
+        validators: &id008 [Joystick]
         value: '0'
     Base: Joystick
     Name: LeftJoystick
   - Children: []
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
-        choices: *id003
+        choices: *id007
         default: 1
         name: Number
-        validators: *id004
+        validators: *id008
         value: '1'
     Base: Joystick
     Name: RightJoystick
@@ -493,11 +571,46 @@ Children:
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: ElevateToX
+  - Children: []
+    Properties:
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value:
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: position, type: double}
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: Shoulder}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id009
+        - !!robotbuilder.data.properties.ParameterSet
+          name: low
+          parameters:
+          - {name: position, type: double, value: '.3'}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: midlle
+          parameters:
+          - {name: position, type: double, value: '.5'}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: high
+          parameters:
+          - {name: position, type: double, value: '.7'}
+        name: Parameter presets
+        validators: null
+        value: *id009
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Command
+    Name: ShoulderToX
   Properties: {}
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\2619\workspace',
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Sandy\workspace',
     extension: null, folder: true, name: Eclipse Workspace, validators: null, value: 'C:\workspace'}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
@@ -516,7 +629,7 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\2619\',
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Sandy\',
     extension: null, folder: true, name: Wiring file location, validators: null, value: 'C:\workspace\PlyBot2018'}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
