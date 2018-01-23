@@ -11,6 +11,7 @@
 
 package org.usfirst.frc2619.PlyBot2018.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.ConditionalCommand;
 import org.usfirst.frc2619.PlyBot2018.Robot;
 
@@ -30,6 +31,14 @@ public class ConditionalTurn extends ConditionalCommand {
 
     @Override
     protected boolean condition(){
-        return Robot.oi.leftJoystick.getRawButton(7);
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if(gameData.charAt(0) == 'L')
+		{
+			return true;
+		} else {
+			return false;
+		}
+        //return Robot.oi.leftJoystick.getRawButton(7);
     }
 }
