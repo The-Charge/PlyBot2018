@@ -11,6 +11,8 @@
 
 package org.usfirst.frc2619.PlyBot2018.commands;
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc2619.PlyBot2018.MathUtil;
 import org.usfirst.frc2619.PlyBot2018.Robot;
 
 /**
@@ -47,7 +49,8 @@ public class XBoxDrive extends Command {
     	double leftSpeed, rightSpeed;
     	leftSpeed = -Robot.oi.getLeftJoystick().getRawAxis(1);
     	rightSpeed = -Robot.oi.getLeftJoystick().getRawAxis(5);
-    	
+    	rightSpeed = MathUtil.adjSpeed(rightSpeed);
+    	leftSpeed = MathUtil.adjSpeed(leftSpeed);
     	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
 

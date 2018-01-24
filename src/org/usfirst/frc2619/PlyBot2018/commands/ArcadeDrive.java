@@ -11,6 +11,8 @@
 
 package org.usfirst.frc2619.PlyBot2018.commands;
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc2619.PlyBot2018.MathUtil;
 import org.usfirst.frc2619.PlyBot2018.Robot;
 
 /**
@@ -67,6 +69,8 @@ public class ArcadeDrive extends Command {
               rightSpeed = -Math.max(-forward, -turn);
             }
         }
+        rightSpeed = MathUtil.adjSpeed(rightSpeed);
+    	leftSpeed = MathUtil.adjSpeed(leftSpeed);
         Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
 
