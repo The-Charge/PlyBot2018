@@ -597,7 +597,7 @@ Children:
         default: None
         name: Input
         type: PIDSource
-        validators: [TypeDropdownSelected]
+        validators: &id009 [TypeDropdownSelected]
         value: DriveTrain doNotUse
       Maximum Output: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: Maximum Output,
         validators: null, value: 0.5}
@@ -605,7 +605,7 @@ Children:
         default: None
         name: Output
         type: PIDOutput
-        validators: [TypeDropdownSelected]
+        validators: &id010 [TypeDropdownSelected]
         value: DriveTrain LeftFrontMotor
       Maximum Input: !!robotbuilder.data.properties.DoubleProperty {default: 5, name: Maximum Input,
         validators: null, value: 360.0}
@@ -625,14 +625,75 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: None}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id008 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id008
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: DriveInverted
+  - Children: []
+    Properties:
+      Limit Output: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Limit Output, validators: null, value: true}
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value:
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: Angle, type: double}
+      D: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: D, validators: null,
+        value: 0.0}
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: DriveTrain}
+      Continuous: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Continuous, validators: null, value: true}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id008
+        - !!robotbuilder.data.properties.ParameterSet
+          name: '90'
+          parameters:
+          - {name: Angle, type: double, value: '90'}
+        name: Parameter presets
+        validators: null
+        value: *id008
+      Tolerance: !!robotbuilder.data.properties.DoubleProperty {default: 0.2, name: Tolerance,
+        validators: null, value: 1.0}
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+      I: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: I, validators: null,
+        value: 0.0}
+      Period: !!robotbuilder.data.properties.DoubleProperty {default: 0.02, name: Period,
+        validators: null, value: 0.02}
+      Minimum Input: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: Minimum Input,
+        validators: null, value: -180.0}
+      Limit Input: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Limit Input, validators: null, value: true}
+      Minimum Output: !!robotbuilder.data.properties.DoubleProperty {default: -1,
+        name: Minimum Output, validators: null, value: -0.5}
+      P: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: P, validators: null,
+        value: 1.0}
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
+      Input: !!robotbuilder.data.properties.TypeSelectionProperty
+        default: None
+        name: Input
+        type: PIDSource
+        validators: *id009
+        value: DriveTrain doNotUse
+      Maximum Output: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: Maximum Output,
+        validators: null, value: 0.5}
+      Output: !!robotbuilder.data.properties.TypeSelectionProperty
+        default: None
+        name: Output
+        type: PIDOutput
+        validators: *id010
+        value: DriveTrain LeftFrontMotor
+      Maximum Input: !!robotbuilder.data.properties.DoubleProperty {default: 5, name: Maximum Input,
+        validators: null, value: 180.0}
+    Base: PID Command
+    Name: TurnNDegreesAbsolutePID
   Properties: {}
   Base: Commands
   Name: Commands
