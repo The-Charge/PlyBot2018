@@ -1,0 +1,556 @@
+<h1 id="phoenix-framework">Phoenix Framework</h1>
+<div class="figure">
+<img src="images/General-Title.png" alt="Title" /><p class="caption">Title</p>
+</div>
+<p>The software framework for all CTR-Electronics robot components.</p>
+<p>See what control components make sense for your robotic needs at <a href="https://www.ctr-electronics.com">CTR-Electronics</a>.</p>
+<hr />
+<p><a href="https://github.com/CrossTheRoadElec/Phoenix-Documentation/blob/master/README.md">2018 Phoenix Documentation</a> | <a href="https://github.com/CrossTheRoadElec/Phoenix-Documentation/blob/master/Migration%20Guide.md">Migration Guide</a><br /><a href="https://github.com/CrossTheRoadElec/Phoenix-Documentation/raw/master/Talon%20SRX%20Victor%20SPX%20-%20Software%20Reference%20Manual.pdf">2018 Software Reference Manual (pdf)</a> | API Docs <a href="http://www.ctr-electronics.com/downloads/api/java/html/index.html">Java</a> <a href="http://www.ctr-electronics.com/downloads/api/cpp/html/index.html">C++</a><br />Examples: <a href="https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages">Java/C++</a>/<a href="https://github.com/CrossTheRoadElec/Phoenix-Examples-LabVIEW">LabVIEW</a>| <a href="https://github.com/CrossTheRoadElec/Phoenix-Documentation/issues">Create an issue</a> | <a href="http://www.ctr-electronics.com/control-system.html">Store</a></p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#purpose-of-this-guide">Purpose of this guide</a></li>
+<li><a href="#looking-for-the-migration-guide">Looking for the migration guide?</a></li>
+<li><a href="#initial-hardware-testing">Initial Hardware Testing</a></li>
+<li><a href="#before-you-write-any-software">Before you write any software!</a></li>
+<li><a href="#installing-phoenix-framework-onto-pc">Installing Phoenix Framework onto PC</a>
+<ul>
+<li><a href="#download-the-installer">Download the Installer</a></li>
+<li><a href="#running-the-installer">Running the Installer</a></li>
+<li><a href="#phoenix-framework-for-non-windows-machines">Phoenix Framework for Non-Windows Machines</a></li>
+</ul></li>
+<li><a href="#installing-phoenix-framework-onto-your-frc-robot">Installing Phoenix Framework onto your FRC robot</a></li>
+<li><a href="#installing-internet-explorer-11">Install Internet Explorer 11</a></li>
+<li><a href="#test-the-phoenix-install-in-eclipse">Test the Phoenix Install in Eclipse</a></li>
+<li><a href="#test-the-phoenix-install-in-labview">Test the Phoenix Install in LabVIEW</a></li>
+<li><a href="#everything-is-installed-can-i-write-software-now">Everything is installed, can I write software now?</a></li>
+<li><a href="#check-the-web-based-configuration">Check the web-based configuration</a></li>
+<li><a href="#set-your-device-ids">Set your device IDs</a></li>
+<li><a href="#update-your-can-devices">Update your CAN Devices</a></li>
+<li><a href="#pick-the-device-names">Pick the device names</a></li>
+<li><a href="#self-test-the-hardware">Self-Test the hardware</a></li>
+<li><a href="#add-javadoc-if-using-java">Add Javadoc if using Java</a></li>
+<li><a href="#where-is-the-api">Where is the API?</a></li>
+<li><a href="#java---how-to-intellisensewhat-to-import">Java - How to intellisense/What to import</a></li>
+<li><a href="#c---how-to-intellisensewhat-header">C++ - How to intellisense/What header</a></li>
+<li><a href="#labview---where-are-the-vis">LabVIEW - Where are the VIs?</a>
+<ul>
+<li><a href="#motor-controller-vis---what-are-mc-and-e-mc">Motor Controller VIs - What are MC and E-MC?</a></li>
+</ul></li>
+<li><a href="#hardware-object-model">Hardware Object Model</a></li>
+<li><a href="#motor-controllers">Motor Controllers</a>
+<ul>
+<li><a href="#where-to-begin">Where to begin?</a></li>
+<li><a href="#factory-default-the-configuration-parameters">Factory Default the Configuration Parameters</a></li>
+<li><a href="#open-loop-no-sensor-control">Open-Loop (No Sensor) Control</a></li>
+<li><a href="#pick-your-direction">Pick your direction</a></li>
+<li><a href="#pick-your-neutral-mode">Pick your neutral mode</a></li>
+<li><a href="#current-limiting">Current limiting</a></li>
+<li><a href="#ramping">Ramping</a></li>
+<li><a href="#follower">Follower</a></li>
+<li><a href="#setup-limit-switches">Setup Limit Switches</a></li>
+<li><a href="#limit-switch-source">Limit Switch Source</a></li>
+<li><a href="#limit-switch-override-enable">Limit Switch Override Enable</a></li>
+<li><a href="#closed-loop-using-sensor-control">Closed-Loop (Using Sensor) Control</a></li>
+<li><a href="#sensors">Sensors</a>
+<ul>
+<li><a href="#why-bother-with-sensors">Why bother with sensors?</a></li>
+<li><a href="#how-do-i-choose-the-sensor">How do I choose the sensor?</a></li>
+<li><a href="#how-do-i-know-the-sensor-works">How do I know the sensor works?</a></li>
+<li><a href="#sensor-phase-and-why-it-matters">Sensor phase and why it matters</a></li>
+<li><a href="#what-are-the-units-of-my-sensor">What are the units?</a></li>
+<li><a href="#setup-the-soft-limits">Setup the soft limits</a></li>
+</ul></li>
+<li><a href="#closed-loop-ramping">Closed-loop Ramping</a></li>
+<li><a href="#closed-loopfirmware-control-modes">Closed-Loop/Firmware Control Modes</a>
+<ul>
+<li><a href="#position-closed-loop-walkthrough">Position closed-loop walkthrough</a></li>
+<li><a href="#current-closed-loop-walkthrough">Current closed-loop walkthrough</a></li>
+</ul></li>
+<li><a href="#closed-loop-gains">Closed-Loop Gains</a>
+<ul>
+<li><a href="#motor-output-units-why-1023">Motor Output Units (Why 1023?)</a></li>
+<li><a href="#closed-loop-error">Closed-loop Error</a></li>
+<li><a href="#feed-forward-kf">Feed-Forward (kF)</a></li>
+<li><a href="#proportional-kp">Proportional (kP)</a></li>
+<li><a href="#integral-ki">Integral (kI)</a></li>
+<li><a href="#derivative-kd">Derivative (kD)</a></li>
+</ul></li>
+<li><a href="#i-want-to-process-the-sensor-myself-how-do-i-do-that">I want to process the sensor myself. How do I do that?</a></li>
+</ul></li>
+<li><a href="#multi-purposesensor-devices">Multi-purpose/Sensor Devices</a>
+<ul>
+<li><a href="#pigeon-imu">Pigeon IMU</a></li>
+<li><a href="#canifier">CANifier</a></li>
+</ul></li>
+<li><a href="#common-device-api">Common Device API</a>
+<ul>
+<li><a href="#error-handling">Error handling</a>
+<ul>
+<li><a href="#did-my-device-reset">Did my device reset?</a></li>
+</ul></li>
+<li><a href="#configuration-parameters">Configuration Parameters</a>
+<ul>
+<li><a href="#configuration-parameters---what-is-timeout-for">Configuration Parameters - What is timeout for</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#software-object-model">Software Object Model</a></li>
+<li><a href="#wpilib-speedcontrollerdrivetrain-objects">WPILib SpeedController/Drivetrain Objects</a>
+<ul>
+<li><a href="#wpilib-javac">WPILib: Java/C++</a></li>
+<li><a href="#wpilib-labview">WPILib: LabVIEW</a></li>
+</ul></li>
+<li><a href="#driver-station">Driver Station</a></li>
+<li><a href="#what-do-i-do-when-i-see-errors-in-driver-station">What do I do when I see errors in Driver Station?</a></li>
+<li><a href="#driver-station-says-the-firmware-is-too-old">Driver Station says the firmware is too old</a></li>
+<li><a href="#driver-station-says-the-firmware-could-not-be-retrieved-and-to-check-the-firmware-and-id">Driver Station says the firmware could not be retrieved and to check the firmware and ID</a></li>
+<li><a href="#crf-firmware-versions">CRF Firmware Versions</a></li>
+<li><a href="#errata">Errata</a></li>
+</ul>
+<h2 id="purpose-of-this-guide"><strong>Purpose of this guide</strong></h2>
+<p>To provide a top-to-bottom walk through of how to integrate CTRE's many hardware products into your robot's software. This includes supporting FRC teams for this season's game POWERUP. The software libraries for CTRE devices are bundled into the Phoenix Framework, which supports FRC-C++/Java/LabVIEW and HERO-C#.</p>
+<h2 id="what-is-new-kickoff"><strong>What is new / Kickoff</strong></h2>
+<p>The Phoenix framework provides the following new feature... - Advanced Current limiting (Peak Current vs Continuous Current with Peak timeout). - Support for the new Victor SPX. - Talon SRX and Victor SPX deadband can be change from 4% to (0.1% - 25%) for all control modes. - New follower features (Victor SPX follows Talon SRX, vice versa) - Support for CANifier (PWM input/ PWM output/ Common-Anode LED Strip/ Digital IO / Quadrature) - Remote Limit Switches. Victor SPX and Talon SRX can use other CANifiers/Victor SPXs/Talon SRXs for forward/reverse limit switch. - API changes to accommodate upcoming Cascaded-PID-Loop and Pigeon-integration in Talon SRX. - API changes to accommodate targeting heading during Motion Magic and Motion Profiling. - WPI_TalonSRX and WPI_VictorSPX classes that drop into WPILIB's various objects. This allows clean implementation of the various WPILIB wrappers. - Increase in Talon SRX/ Victor SPX number of closed-loop slots (from two to four). - Robot Builder support for all devices above. - Support for all three FRC languages. - Motor controller configuration parameters can be defaulted with B/C press-and-hold on boot. - SetInvert applies &quot;all the way&quot; down to the firmware for all control modes. You can also SetInvert() without breaking Sensor phase. - Documentation is now on GitHub to allow for greater collaboration, along with example repositories.</p>
+<h2 id="what-is-coming-next-post-kickoff"><strong>What is coming next / Post Kickoff</strong></h2>
+<p>Shortly after Kickoff will be an additional update to support... - Remote sensor selection for closed looping off of sensors on other CAN devices. - Pigeon IMU integration into Talon closed-loops (MotionMagicArc and MotionProfileArc). - Various upper level objects (Gearbox/Drivetrain/Servo objects with unit scaling).</p>
+<h2 id="looking-for-the-migration-guide"><strong>Looking for the migration guide?</strong></h2>
+<p>The migration guide is can be found <a href="https://github.com/CrossTheRoadElec/Phoenix-Documentation/blob/master/Migration%20Guide.md">here</a>.</p>
+<h2 id="initial-hardware-testing"><strong>Initial Hardware Testing</strong></h2>
+<p>For your competition team to have the best chance of success, hardware components should be tested as soon as they are received. This is generally done by... - Powering up the device and confirming LED states. - Ensuring hardware shows up in the web-based config if wired to CAN Bus. - Drive outputs / drive motor in both directions (if motor controller). - Factory default using the B/C calibration button to default persistent settings. This is explained in the sections below, but it is worth pointing out how important this step is. It is in your team's best interest to test ALL purchased robot components immediately and in isolation. - Robot replacement components should be in a state of readiness. Otherwise a replacement during competition can yield erroneous behavior. - Many robot components (in general) have fixed warranty periods, and replacements must be done within them. - Confirming devices are functional before handing them to students ensures best chance of success.</p>
+<h2 id="before-you-write-any-software"><strong>Before you write any software!</strong></h2>
+<p>Follow the sections below in order. Otherwise you will see compiler errors for missing calls/VIs. This is also necessary for the roboRIO Web-based configuration.</p>
+<h3 id="installing-phoenix-framework-onto-pc">Installing Phoenix Framework onto PC</h3>
+<p>The Phoenix Framework installer is the Windows Executable Installer that provides all software and API Libraries required to support CTRE products.</p>
+<p><strong>FRC Teams:</strong> Phoenix Framework should be installed after all other FRC software, including LabVIEW and/or Eclipse and the Driver Station update. See the <a href="http://wpilib.screenstepslive.com/s/currentCS">FRC Screensteps</a> for instructions on FRC Software.</p>
+<p>If your computer is not running a Windows operating system, see the <a href="#phoenix-framework-for-non-windows-machines">non-windows</a> section. #### Download the Installer The installer can be found <a href="http://www.ctr-electronics.com/control-system/hro.html#product_tabs_technical_resources">here</a>. Download and unzip the latest version of the CTRE Phoenix Framework Installer.</p>
+<p>This page also contains some installer archives, so if you need an older version you can find it here as well.</p>
+<p><strong>FRC Teams:</strong> For the 2018 competition season, the minimum installer version that will work with the current control system is version 5.1.1.1. #### Running the Installer <strong>Note:</strong> You will need administrative privileges to run the installer.</p>
+<p>Run the executable that was downloaded in the previous step. If Windows prompts with an &quot;unpublished&quot; dialog box, press &quot;More Info&quot; and &quot;Allow App to Run&quot;.</p>
+<div class="figure">
+<img src="images/Phoenix-installerSplash.png" />
+</div>
+<p>At a minimum, you must select the components for the programming language you are using.</p>
+<div class="figure">
+<img src="images/Phoenix-installerComponents.png" />
+</div>
+<p>After the installation is finished, you must restart any programming environment you are using (Eclipse or LabVIEW). #### Phoenix Framework for Non-Windows Machines A zip file containing the Phoenix Framework libraries is available <a href="http://www.ctr-electronics.com/control-system/hro.html#product_tabs_technical_resources">here</a>.</p>
+<p>Download the latest non-windows zip file and follow the README it contains to install the Phoenix API.</p>
+<h3 id="installing-phoenix-framework-onto-your-frc-robot">Installing Phoenix Framework onto your FRC robot</h3>
+<p>It is necessary to install Phoenix onto your roboRIO in order to use the Web-Based Configuration Page.</p>
+<p>Additionally, LabVIEW teams must install Phoenix on the roboRIO for their robot programs using Phoenix to run properly.</p>
+<p>Open the Phoenix LifeBoat utility and select the &quot;roboRIO Upgrade&quot; tab. Follow the instructions on the tab to install Phoenix on your roboRIO. <img src="images/LifeBoat-WebdashUpdate.png" /></p>
+<p>When the upgrade is complete, a prompt will appear instructing LabVIEW teams restart their application. Java teams are also asked to redeploy their application to ensure the correct Phoenix library is installed (development PC vs robot controller).</p>
+<p><img src="images/lifeboat-webdashupdatecomplete.png" alt="LifeBoat-WebdashUpdateComplete" /> ### Installing Internet Explorer 11 Internet Explorer 11 is necessary to use the roboRIO web-based configuration.<br />In the future, CTRE will be replacing this interface, but for the time being this is the primary means of checking the presence of your CAN devices. This also allows for field-upgrade, device ID setting, etc.</p>
+<p><strong>Windows 7</strong> and <strong>Windows 10</strong> already have Internet Explorer 11 installed.</p>
+<p>It can be manually installed here... https://support.microsoft.com/en-us/help/17621/internet-explorer-downloads</p>
+<p>To test if Internet Explorer 11 is already installed, try running &quot;iexplore&quot; in the Windows start menu. Press Windows Key + 'R' to open Run window. Type &quot;iexplore&quot; and press enter.</p>
+<div class="figure">
+<img src="images/windows-run.png" alt="Windows-Run" /><p class="caption">Windows-Run</p>
+</div>
+<h3 id="test-the-phoenix-install-in-eclipse">Test the Phoenix Install in Eclipse</h3>
+<p>The Eclipse files are typically installed in - C:-user-name(libCTRE_Phoenix) - C:-user-name(CTRE_Phoenix)</p>
+<p>After the Phoenix Installer places these files, generally <strong>Eclipse must be restarted</strong>. Otherwise the IDE may report that the classes/functions cannot be found.</p>
+<p>C++ Teams can confirm that the library was installed and discovered correctly by monitoring the Console tab. <img src="images\CPP-ConsoleLibraryList.png" /></p>
+<p>Java Teams can confirm that both jar files are discovered in the project tree. <img src="images\Java-AddingJavadocReferencedLibraries.png" /></p>
+<h3 id="test-the-phoenix-install-in-labview">Test the Phoenix Install in LabVIEW</h3>
+<p>Testing the install can be done by opening LabVIEW and confirming the VIs are installed. This can be done by opening an existing project or creating a new project, or opening a single VI in LabVIEW. Whatever the simplest method to getting to the LabVIEW palette.</p>
+<p>Instructions for checking the palette can be found <a href="#labview---where-are-the-vis">here</a> The file locations are also explained for manually review of the VIs.</p>
+<h2 id="everything-is-installed-can-i-write-software-now"><strong>Everything is installed, can I write software now?</strong></h2>
+<p>Nope, there is still more to do. Follow each subsection to ensure device communication is healthy. Otherwise troubleshooting your software will become unnecessarily difficult.</p>
+<h3 id="check-the-web-based-configuration">Check the web-based configuration</h3>
+<p>A useful diagnostic feature in the FRC Control system is the roboRIO's Web-based Configuration and Monitoring page. This provides diagnostic information on all discovered CTRE CAN devices. CTRE devices can also be field-upgraded using this interface. This feature is accessible by entering the mDNS name of your robot in a web browser, typically <strong>roborio-XXXX-frc.local</strong> where XXXX is the team number (no leading zeros for three digit team numbers).</p>
+<p>When connected via <strong>USB</strong>, you can generally type <strong>172.22.11.2</strong> to quickly reach web-based config. <img src="images/Webdash-CheckWebdash.png" /></p>
+<p>Because the interface uses Silverlight, the user must use Internet Explorer 11. Instructions on installing Internet Explorer can be found <a href="#installing-internet-explorer-11">here.</a></p>
+<h3 id="missing-can-interface">Missing &quot;CAN Interface&quot;</h3>
+<p>If &quot;CAN Interface&quot; is missing, then the web-based config plugin is likely not installed.</p>
+<div class="figure">
+<img src="images/webdash-badcaninterface.png" alt="Webdash-BadCanInterface" /><p class="caption">Webdash-BadCanInterface</p>
+</div>
+<p>Instructions for upgrading the roboRIO are <a href="#installing-phoenix-framework-onto-your-frc-robot">here</a></p>
+<h3 id="set-your-device-ids">Set your device IDs</h3>
+<p>A CTRE CAN Device can have a device ID from 0 to 62. 63 and above are not allowed. If you select an invalid ID, you will get an immediate prompt.</p>
+<div class="figure">
+<img src="images/webdash-badid.png" alt="Webdash-BadId" /><p class="caption">Webdash-BadId</p>
+</div>
+<p>Two dissimilar CAN models can use the same device ID. For example, Talon SRX 1 and Victor SPX 1 can coexist on the same CAN bus. However two models must not use the same device ID. Set the device ID of each device in isolation or use the web-based config to change the default ID from '0' to a unique number, then duplicate/close-reopen the internet explorer page to re-populate the device tree.</p>
+<h3 id="update-your-can-devices">Update your CAN Devices</h3>
+<p>You will need to be logged into the roboRIO Web-based configuration to update your CAN devices. Username is &quot;admin&quot; with a blank password.</p>
+<div class="figure">
+<img src="images/Webdash-Login.png" />
+</div>
+<p>Select a CAN device in the device tree and press the &quot;Update firmware button&quot;.<br />#### Firmware (CRF) Location Phoenix installs the Cross The Road Firmware Files (CRF) into two locations... - C:(or similar). - C:The Road ElectronicsFirmware Files</p>
+<p>Make sure when checking these folders that you are looking on the same computer you installed Phoenix.</p>
+<p>Firmware files are named Product-Application-Version-Suffix.crf.</p>
+<p><strong>Minimum Talon SRX firmware is 3.1.</strong><br />Specific CRF Version information can be found <a href="#crf-firmware-versions">here</a>.</p>
+<p>NOTE: Firmware versions are read as MAJOR-DOT-MINOR. E.g. 1.23 =&gt; One-dot-twenty-three E.g. 1.4 =&gt; One-dot-four Therefore 1.23 is <strong>newer</strong> than 1.4.</p>
+<h3 id="pick-the-device-names">Pick the device names</h3>
+<p>Each device can be named uniquely to identify it's purpose or unique characteristics. Feel free to change the contents of the name of a selected CAN device, and press Save. If you clear the Name text entry and press save, the name will default to &quot;Device (Device Number)&quot;</p>
+<h3 id="self-test-the-hardware">Self-Test the hardware</h3>
+<p>Press the self-test button to acquire a snapshot of the device's signals. This can be used to determine various configuration information, sensor health, and reliability of the device.</p>
+<h2 id="where-is-the-api"><strong>Where is the API</strong></h2>
+<p>The API is available in several forms.... - The LabVIEW/C++/Java API source is available on GitHub. - HTML documentation for C++/Java is generally available on ctr-electronics.com and on the developer's PC after Phoenix install. - Eclipse supports intellisense/auto-coding features.</p>
+<p>The following sections should be followed to ensure the best software-developing experience.</p>
+<h3 id="add-javadoc-if-using-java">Add Javadoc if using Java</h3>
+<p>Eclipse Java users will have to add the Javadoc manually whenever creating or working with a new project to fully utilize the intellisense when programming. Steps can be found below.</p>
+<ol style="list-style-type: decimal">
+<li><p>Using the Package Explorer in the Java view, navigate through your new project to the &quot;Referenced Libraries&quot; tab. From there, you will both find <strong>CTRE_Phoenix.jar and CTRE_Phoenix-sources.jar.</strong> <img src="images/Java-AddingJavadocReferencedLibraries.png" /></p></li>
+<li><p>Right click on CTRE_Phoenix.jar and select preferences. From there, you will navigate to the &quot;Java Source Attachment&quot; window. <img src="images/Java-AddingJavadocProperties.png" /></p></li>
+<li><p>Click on the &quot;Variable&quot; button and Create a new variable by clicking on &quot;New...&quot; <img src="images/Java-AddingJavadocVariable.PNG" /></p></li>
+<li><p>From there you should see a &quot;Edit Variable&quot; window as seen below. Start off by using the exact name of &quot;CTRE_Phoenix.sources&quot;. Then clicking on &quot;File..&quot;, navigate to the CTRE_Phoenix-sources.jar file, which is generally found within C:'AccountName'<img src="images/Java-AddingJavadocEditVariable.png" /></p></li>
+<li><p>Now exit all windows by clicking on &quot;OK&quot;. Verify that the Javadoc has been installed by hovering over any of the Phoenix Framework API which should bring up a small window with information about the API's functionality, parameters, return. It also grants the ability to go to the API's source location. <img src="images/Java-AddingJavadocVerify.png" /></p></li>
+</ol>
+<h3 id="java---how-to-intellisensewhat-to-import">Java - How to intellisense/What to import</h3>
+<p>The java libraries for the phoenix framework can be imported by starting the import with <code>import com.ctre.phoenix.</code> The line can be finished off by manually typing in the package wanted or by using intellisense. Intellisense can be brought up by pressing CTRL + Spacebar at the . (dot). This will show all the sub-packages, classes, and interfaces available within the current package as seen below. <img src="images/Java-Intellisense.png" /> <img src="images/Java-IntellisenseSymbols.png" /></p>
+<p>If the Javadoc was installed properly, which was explained in the <a href="#add-javadoc-if-using-java">&quot;Add Javadoc if using Java&quot;</a> section, you should have the ability to hover over the Phoenix Framework API and find it's functionality details, parameters and return. <img src="images/java-IntellisenseCheck.png" /> ### C++ - How to intellisense/What header C++ modules simply need to include one header</p>
+<pre><code>#include &quot;ctre/Phoenix.h&quot;</code></pre>
+<p>This single header will include several of the Phoenix header files and brings several Phoenix namespaces into scope. Advanced C++ programmers may wish to avoid including many namespaces, in which case they can probe the contents of the header and pick out what they need.</p>
+<h3 id="labview---change-the-palette-view">LabVIEW - Change the Palette View</h3>
+<p>The default Palette View can be confusing for most teams, as the names of the VI's are hidden. This can be changed by the following procedure:</p>
+<ul>
+<li>Options screen under LabVIEW Tools</li>
+</ul>
+<div class="figure">
+<img src="images/LV-OptionsSelect.png" />
+</div>
+<div class="figure">
+<img src="images/LV-PaletteChangeOptions.png" />
+</div>
+<h3 id="labview---where-are-the-vis">LabVIEW - Where are the VIs?</h3>
+<p>The CTRE Palette is located in: - WPI Robotics Library -&gt; Third Party.</p>
+<div class="figure">
+<img src="images/CTRETopLevelPaletteLocation.png" />
+</div>
+<p>This palette can also be found in: - WPI Robotics Library -&gt; RobotDrive -&gt; MotorControl -&gt; CanMotor - WPI Robotics Library -&gt; Sensors -&gt; Third Party - WPI Robotics Library -&gt; Actuators -&gt; Third Party</p>
+<h4 id="where-are-the-vis-on-disk">Where are the VIs on disk?</h4>
+<p>The Phoenix VIs are installed inside a folder in the main installation directory. This would be: &quot;C:The Road Electronics&quot;.</p>
+<p>If your Public Documents folder is on different drive, your drive letter may be different.</p>
+<h4 id="motor-controller-vis---what-are-mc-and-e-mc">Motor Controller VIs - What are MC and E-MC?</h4>
+<p>There are two types of VI when it comes to CTRE/VEX motor controllers - Motor Controller (or &quot;MC&quot;) <img src="images/LV-MotorControllerTemplate.png" /> and Enhanced Motor Controller (or &quot;E-MC&quot;) <img src="images/LV-EnhancedMotorControllerTemplate.png" /> .</p>
+<p><img src="images/LV-MotorControllerTemplate.png" /> Motor Controller VIs work for all CTRE/VEX motor controllers.</p>
+<p><img src="images/LV-EnhancedMotorControllerTemplate.png" /> Enhanced Motor Controller VIs work only for motor controllers with a data port (currently Talon SRX).</p>
+<h2 id="hardware-object-model"><strong>Hardware Object Model</strong></h2>
+<h3 id="motor-controllers">Motor Controllers</h3>
+<p>CTRE/VEX provide two CAN/PWM motor controller options... - <a href="http://www.ctr-electronics.com/victor-spx.html">Victor SPX</a> - <a href="http://www.ctr-electronics.com/talon-srx.html">Talon SRX</a></p>
+<h4 id="where-to-begin-create-the-object.">Where to begin? Create the object.</h4>
+<p>The first step of controlling a motor controller is to instantiate the controller in your robot controller software.</p>
+<p>If using LabVIEW, use the Open VI corresponding to your motor controller. Here we are creating an object for the Talon with device ID 15. Notice that with LabVIEW you can also pick your motor direction on open.</p>
+<div class="figure">
+<img src="images/LV-OpenTalon.png" />
+</div>
+<p>If using a programming language, create a Talon SRX object using the appropriate class name.</p>
+<p><code>private TalonSRX m_Wheel = new TalonSRX(15);</code></p>
+<p>Regardless of the what the motor controller is used for, the next step is usually open-loop (no sensor) control. This is to ensure the mechanism is functional and that the motor and motor controller is wired correctly.</p>
+<p>Start with the open-loop features below and configure each setting that is applicable.</p>
+<h4 id="factory-default-the-configuration-parameters">Factory Default the Configuration Parameters</h4>
+<p>Both the Talon SRX and Victor SPX have some persistent settings such as neutral mode, limit switches, soft limits, PID gains and a few others. These settings can be reverted to factory defaults by holding the B/C button on the Talon SRX and Victor SPX.</p>
+<ol style="list-style-type: decimal">
+<li>Hold down the B/C CAL button until both status LEDS begin to rapidly blink red and green.</li>
+<li>Release the B/C CAL button.</li>
+<li>If the Talon SRX was calibrated properly, the status LEDs will blink green several times. If the calibration failed, the status LEDs will blink red and the previous calibration will be kept.</li>
+</ol>
+<div class="figure">
+<img src="images/TalonBootCalButton.png" alt="Talon SRX&#39;s B/C Button" /><p class="caption">Talon SRX's B/C Button</p>
+</div>
+<h4 id="open-loop-no-sensor-control">Open-Loop (No Sensor) Control</h4>
+<p>These features and configurations influence the behavior of the motor controller when it is directly controlled by the robot controller. ##### Pick your direction Motor controller output direction can be set by calling the <code>setInverted()</code> function as seen below.<br />Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop). Only the <strong>motor leads</strong> are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern (when LEDs are green =&gt; forward limit switch and soft limits are being checked).</p>
+<p>Pass in false if the signage of the motor controller is correct, else pass in true to reverse direction.</p>
+<h6 id="inverting-followers">Inverting Followers</h6>
+<p>When using motor controllers in a master/follower configuration, <strong>all</strong> motor controllers need to have their direction set independently. A follower controller will not automatically change direction if you only invert the master.</p>
+<p>Java -</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/* Talon Direction has been inverted */</span>
+Hardware.<span class="fu">Talon</span>.<span class="fu">setInverted</span>(<span class="kw">true</span>);</code></pre>
+<p>LabVIEW - You can pick your direction in the open VI. Use the Set Invert VI if you need to change it again.</p>
+<div class="figure">
+<img src="images/LV-Invert.png" />
+</div>
+<h5 id="pick-your-neutral-mode">Pick your neutral mode</h5>
+<p>Mode of operation during Neutral output may be set by using the <code>setNeutralMode()</code> function.</p>
+<p>As of right now, there are two options when setting the neutral mode of a motor controller, brake and coast.</p>
+<p>Java -</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/* Displaying the two neutral mode options that both the Talon and Victor have */</span>
+Hardware.<span class="fu">Talon</span>.<span class="fu">setNeutralMode</span>(com.<span class="fu">ctre</span>.<span class="fu">phoenix</span>.<span class="fu">motorcontrol</span>.<span class="fu">NeutralMode</span>.<span class="fu">Coast</span>);
+Hardware.<span class="fu">Talon</span>.<span class="fu">setNeutralMode</span>(com.<span class="fu">ctre</span>.<span class="fu">phoenix</span>.<span class="fu">motorcontrol</span>.<span class="fu">NeutralMode</span>.<span class="fu">Brake</span>);</code></pre>
+<p>LabVIEW -</p>
+<div class="figure">
+<img src="images/LV-NeutralMode.png" />
+</div>
+<h5 id="current-limiting">Current limiting</h5>
+<p>Talon SRX can limit the output current to a specified maximum threshold. This functionality (when enabled) functions in all control modes.</p>
+<p>Current limiting configuration and enable can be controlled by the following API.</p>
+<ol style="list-style-type: decimal">
+<li>Configure the continuous current limit to the amperage that you desire the current-draw be limited to.</li>
+<li>Configure the peak current limit to the threshold necessary to exceed to activate current limiting. If the peak current limit is less than the continuous current limit (zero for example) current limiting will be enforced when the current-draw exceeds to continuous current limit.</li>
+<li>Configure the peak current duration to the duration allowable over the peak current limit. If peak current duration is configured to 0, current limiting is enforced immediately after current-draw surpasses the peak current threshold.</li>
+<li>Enable current limiting.</li>
+</ol>
+<p><strong>Note</strong>: There is a noise floor (around 1-2 amps) to the Talon SRX current measurements. Setting a current limit close to those values may yield unexpected results. As a general rule of thumb it is not recommended to use a current limit below 5 amps.</p>
+<pre class="sourceCode Java"><code class="sourceCode java"><span class="co">/* The following java example limits the current to 10 amps whenever the current has exceeded 15 amps for 100 Ms */</span>
+talon.<span class="fu">configContinuousCurrentLimit</span>(<span class="dv">10</span>, <span class="dv">0</span>);
+talon.<span class="fu">configPeakCurrentLimit</span>(<span class="dv">15</span>, <span class="dv">0</span>);
+talon.<span class="fu">configPeakCurrentDuration</span>(<span class="dv">100</span>, <span class="dv">0</span>);
+talon.<span class="fu">enableCurrentLimit</span>(<span class="kw">true</span>);</code></pre>
+<p>LabVIEW and C++ have similar function/VIs.</p>
+<h5 id="ramping">Ramping</h5>
+<p>The Talon SRX and Victor SPX can be set to honor a ramp rate to prevent instantaneous changes in output.</p>
+<p>There are two ramp rates - one for open-loop control modes and one for closed-loop control modes.</p>
+<p>The open-loop ramp rate of a motor controller can be configured by using the <code>configOpenloopRamp();</code> function. The function takes two parameters and returns a Error code generated by the function if the configuration fails to complete within the timeout.</p>
+<p><strong>Note:</strong> The open-loop ramp rate should only be configured for motor controller masters, as followers will mimic the Masters output already.</p>
+<p>Java -</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/* Talon is configured to ramp from neutral to full within 2 seconds, and followers are configured to 0*/</span>
+leftMaster.<span class="fu">configOpenloopRamp</span>(<span class="dv">2</span>, <span class="dv">0</span>);
+leftFollower.<span class="fu">configOpenloopRamp</span>(<span class="dv">0</span>, <span class="dv">0</span>); <span class="co">/* no need since master ramps */</span>
+rightMaster.<span class="fu">configOpenloopRamp</span>(<span class="dv">2</span>, <span class="dv">0</span>);
+rightFollower.<span class="fu">configOpenloopRamp</span>(<span class="dv">0</span>, <span class="dv">0</span>); <span class="co">/* no need since master ramps */</span></code></pre>
+<p>LabVIEW -</p>
+<div class="figure">
+<img src="images/LV-openloopRamp.png" />
+</div>
+<h5 id="follower">Follower</h5>
+<p>Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output. <strong>Users will still need to set the motor controller's direction and neutral mode.</strong></p>
+<p>There are two methods for creating a follower motor controller. The first method <code>set(ControlMode.follower, IDofMotorController)</code> allows users to create a motor controller follower of the same model, talon to talon, or victor to victor.</p>
+<p>The second method <code>follow()</code> allows users to create a motor controller follower of not only the same model, but also other models, talon to talon, victor to victor, talon to victor, and victor to talon.</p>
+<p>Java -</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/* The first line, we have a Victor following a Talon. The follow() function may also be used to create Talon follower for a Victor */</span>
+victorFollower.<span class="fu">follow</span>(Hardware.<span class="fu">TalonMaster</span>);
+<span class="co">/* In the second line, we have a Talon following Talon. The set(ControlMode.Follower, MotorcontrollerID) creates followers of the same model. */</span>
+talonFollower.<span class="fu">set</span>(com.<span class="fu">ctre</span>.<span class="fu">phoenix</span>.<span class="fu">motorcontrol</span>.<span class="fu">ControlMode</span>.<span class="fu">Follower</span>, <span class="dv">6</span>);</code></pre>
+<p>LabVIEW -</p>
+<p>Below is an example using the new FOLLOW VI.</p>
+<div class="figure">
+<img src="images/LV-FollowEither.png" />
+</div>
+<p>Avoid using the SET VI when using LabVIEW as this is unsupported.<br /><img src="images/LV-FollowTalon.png" /></p>
+<h4 id="setup-limit-switches">Setup Limit switches</h4>
+<p>An “out of the box” Talon SRX or Victor SPX will default to the limit switch setting of “Normally Open” for both forward and reverse. This means that motor drive is allowed when a limit switch input is not closed (i.e. not connected to ground). When a limit switch input is closed (is connected to ground) the Talon SRX/Victor SPX will disable motor drive and individually blink both LEDs red in the direction of the fault (red blink pattern will move towards the M+/white wire for positive limit fault, and towards M-/green wire for negative limit fault)</p>
+<div class="figure">
+<img src="images/General-LimitSwitches.png" alt="Chart for limit switching" /><p class="caption">Chart for limit switching</p>
+</div>
+<p>Limit switch features can be disabled or changed to “Normally Closed” in the roboRIO web-based configuration. Changing the settings will take effect once the “Save” button is pressed. The settings are saved in persistent memory.</p>
+<div class="figure">
+<img src="images/Webdash-NeutralModeAndLimitSwitches.png" alt="Webdash image" /><p class="caption">Webdash image</p>
+</div>
+<p>If the neutral mode or limit switch mode is changed in the roboRIO web-based configuration, the motor controller will momentarily disable then resume motor drive. All other settings can be changed without impacting the motor drive or enabled-state of the Talon SRX</p>
+<h5 id="limit-switch-source">Limit Switch Source</h5>
+<p>The source of the forward and reverse limit switches are configurable in software. For Talon SRX you can choose the default feedback connector (data port), and for both controllers you can choose a remote source or to deactivate the limit switch. You must also indicate whether this limit switch is normally open, normally closed, or disabled, which overrides the setting from the web-based configuration page. This override is not permanent and will be reset when the device is power cycled. If you are choosing a remote source, you must also specify the device ID of the remote CAN device.</p>
+<p>Java -</p>
+<pre class="sourceCode Java"><code class="sourceCode java"><span class="co">/* Configured forward and reverse limit switch of Talon to be from a feedback connector and be normally open */</span>
+Hardware.<span class="fu">leftTalonMaster</span>.<span class="fu">configForwardLimitSwitchSource</span>(LimitSwitchSource.<span class="fu">FeedbackConnector</span>, LimitSwitchNormal.<span class="fu">NormallyOpen</span>, <span class="dv">0</span>);
+Hardware.<span class="fu">leftTalonMaster</span>.<span class="fu">configReverseLimitSwitchSource</span>(LimitSwitchSource.<span class="fu">FeedbackConnector</span>, LimitSwitchNormal.<span class="fu">NormallyOpen</span>, <span class="dv">0</span>);
+
+
+<span class="co">/* Configured forward and reverse limit switch of a Victor to be from a Remote Talon SRX with the ID of 3 and normally closed */</span>
+Hardware.<span class="fu">rightVictorMaster</span>.<span class="fu">configForwardLimitSwitchSource</span>(RemoteLimitSwitchSource.<span class="fu">RemoteTalonSRX</span>, LimitSwitchNormal.<span class="fu">NormallyClosed</span>, <span class="dv">3</span>, <span class="dv">0</span>);
+Hardware.<span class="fu">rightVictorMaster</span>.<span class="fu">configReverseLimitSwitchSource</span>(RemoteLimitSwitchSource.<span class="fu">RemoteTalonSRX</span>, LimitSwitchNormal.<span class="fu">NormallyClosed</span>, <span class="dv">3</span>, <span class="dv">0</span>);</code></pre>
+<p>LabVIEW -</p>
+<div class="figure">
+<img src="images/LV-configFwdLim.png" />
+</div>
+<h5 id="limit-switch-override-enable">Limit Switch Override Enable</h5>
+<p>The enable state of the limit switches can be overridden in software. This can be called at any time to enable or disable both limit switches.</p>
+<p>Java -</p>
+<pre class="sourceCode Java"><code class="sourceCode java"><span class="co">/* Limit switches are forced disabled on Talon and forced enabled on Victor */</span>
+Hardware.<span class="fu">leftTalonMaster</span>.<span class="fu">overrideLimitSwitchesEnable</span>(<span class="kw">false</span>);
+Hardware.<span class="fu">rightVictorMaster</span>.<span class="fu">overrideLimitSwitchesEnable</span>(<span class="kw">true</span>);</code></pre>
+<p>LabVIEW -</p>
+<div class="figure">
+<img src="images/LV-overrideLimitEnable.png" />
+</div>
+<h4 id="closed-loop-using-sensor-control">Closed-Loop (Using Sensor) Control</h4>
+<p>These features and configurations influence the behavior of the motor controller when encoders/sensors are being used to provide feedback to a maneuver. ##### Sensors Sensors for motor controllers provide feedback about the position, velocity, and acceleration of the system using that motor controller. The Talon SRX supports a wide variety of sensors while the Victor SPX is able to grab sensor data from another motor controller, which we call remote source.</p>
+<h6 id="why-bother-with-sensors">Why bother with sensors?</h6>
+<p>Sensors allows both the motor controller and user to receive data and feedback. That information allows us to act upon different situations by giving us information about the motors position, speed, and acceleration. This information is especially important when implementing a closed-loop control, such as a PID control loop.</p>
+<h6 id="how-do-i-choose-the-sensor">How do I choose the sensor?</h6>
+<p>Java/C++ - Use the configSelectedFeedbackSensor routine. Example below.. LabVIEW - Use the &quot;Config Sensor&quot; Vi under Victor SPX or Talon SRX (depending on motor controller).</p>
+<h6 id="how-do-i-know-the-sensor-works">How do I know the sensor works?</h6>
+<p>There are multiple methods of ensuring the connected sensor is active and returning meaningful data. The best method is to plot the signal and watch the plot, looking for continuous data that is responsive. Another, but less reliable method is to print your values to a console and check for values, which makes it harder to see if there is noise in the values.</p>
+<p>If the reported value is not what is expected (eg. quadrature position is reporting as 0 or 1), check your sensor and wiring to make sure the physical sensor setup is good.</p>
+<p>Java/C++ - For the FRC languages, the easiest way to produce a plot is to use the SmartDashboard, a feature part of the FRC Driver Station. Below is an example of how to set up the sensor on the Talon SRX and get a plot.</p>
+<p>Java -</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/* Setup sensors to check status, can also be used for phasing */</span>
+Hardware.<span class="fu">rightMaster</span>.<span class="fu">configSelectedFeedbackSensor</span>(com.<span class="fu">ctre</span>.<span class="fu">phoenix</span>.<span class="fu">motorcontrol</span>.<span class="fu">FeedbackDevice</span>.<span class="fu">QuadEncoder</span>, <span class="dv">0</span>, <span class="dv">0</span>);
+Hardware.<span class="fu">rightMaster</span>.<span class="fu">setSensorPhase</span>(<span class="kw">false</span>);
+Hardware.<span class="fu">leftMaster</span>.<span class="fu">configSelectedFeedbackSensor</span>(com.<span class="fu">ctre</span>.<span class="fu">phoenix</span>.<span class="fu">motorcontrol</span>.<span class="fu">FeedbackDevice</span>.<span class="fu">QuadEncoder</span>, <span class="dv">0</span>, <span class="dv">0</span>);
+Hardware.<span class="fu">leftMaster</span>.<span class="fu">setSensorPhase</span>(<span class="kw">false</span>);
+
+<span class="co">/* Output value to SmartDashboard */</span>
+SmartDashboard.<span class="fu">putNumber</span>(<span class="st">&quot;Right Sensor position&quot;</span>, Hardware.<span class="fu">rightMaster</span>.<span class="fu">getSelectedSensorPosition</span>(<span class="dv">0</span>));
+SmartDashboard.<span class="fu">putNumber</span>(<span class="st">&quot;Left Sensor Velocity&quot;</span>, Hardware.<span class="fu">leftMaster</span>.<span class="fu">getSelectedSensorVelocity</span>(<span class="dv">0</span>));</code></pre>
+<p>Once you have deployed the code and opened SmartDashboard from the FRC Driver Station, you may reveal the values by going under the view tab and revealing the values which will be listed by their key name. You may then change the numerical indicator the a line-plot and generate the plot by driving the motor controller.</p>
+<div class="figure">
+<img src="images/Java-SensorCheck.png" alt="Image of the plots generated from driving" /><p class="caption">Image of the plots generated from driving</p>
+</div>
+<h6 id="sensor-phase-and-why-it-matters">Sensor phase and why it matters</h6>
+<p>Sensor phase is the term used to explain sensor direction. In order for limit switches and closed-loop features to function properly the sensor and motor has to be “in-phase.” This means that the sensor position must move in a positive direction as the motor controller drives positive output. To test this, first drive the motor manually (using gamepad axis for example). Watch the sensor position in the roboRIO web-based configuration self-test, plot using the method explained in the section <a href="#how-do-i-know-the-sensor-works"><em>How do I know the sensor works?</em></a>, or by calling <code>GetSensorPosition()</code> and printing it to console.</p>
+<p>Sensor phase can be set by using <code>setSensorPhase()</code>. If the sensor is out of phase, set true.</p>
+<p>Java -</p>
+<pre class="sourceCode Java"><code class="sourceCode java"><span class="co">/* Sensor was out of phase, invert the sensor */</span>
+Hardware.<span class="fu">Talon</span>.<span class="fu">setSensorPhase</span>(<span class="kw">true</span>);</code></pre>
+<p>C++ -</p>
+<p>LabVIEW -</p>
+<div class="figure">
+<img src="images/LV-sensorPhase.png" />
+</div>
+<h6 id="what-are-the-units-of-my-sensor">What are the units of my sensor?</h6>
+<p>Position units are in the natural units of the sensor. This ensures the best resolution possible when performing closed-loops in firmware.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Sensor Type</th>
+<th align="center">Units per rotation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Quadrature Encoder : US Digital 1024 CPR</td>
+<td align="center">4096 (because Talon/CANifer counts every edge)</td>
+</tr>
+<tr class="even">
+<td align="left">CTRE Magnetic Encoder (relative/quadrature)</td>
+<td align="center">4096</td>
+</tr>
+<tr class="odd">
+<td align="left">CTRE Magnetic Encoder (absolute/pulse width encoded)</td>
+<td align="center">4096</td>
+</tr>
+<tr class="even">
+<td align="left">Any pulse width encoded position</td>
+<td align="center">4096 represents 100% duty cycle</td>
+</tr>
+<tr class="odd">
+<td align="left">AndyMark CIMcoder</td>
+<td align="center">80 (because 20 pulses =&gt; 80 edges)</td>
+</tr>
+</tbody>
+</table>
+<p>Velocity is measured in sensor units per 100ms. This ensures sufficient resolution regardless of the sensing strategy. For example, when using the CTRE Magnetic Encoder, 1u velocity represents 1/4096 of a rotation every 100ms. Generally you can multiply the velocity units by 600/UnitsPerRotation to obtain RPM.</p>
+<p>Tachometer velocity measurement is unique in that it measures time directly. As a result, the reported velocity is calculated where 1024 represents a full &quot;rotation&quot;. This means that a velocity measurement of 1 represents 1/1024 of a rotation every 100ms.</p>
+<h6 id="setup-the-soft-limits">Setup the soft limits</h6>
+<p>Soft limits can be used to disable motor drive when the “Sensor Position” is outside of a specified range. Forward output will be disabled if the “Sensor Position” is greater than the Forward Soft Limit. Reverse output will be disabled if the “Sensor Position” is less than the Reverse Soft Limit. The respective Soft Limit Enable must be enabled for this feature to take effect.</p>
+<p>Java -</p>
+<pre class="sourceCode Java"><code class="sourceCode java"><span class="co">/* Talon configured to have soft limits 10000 native units in either direction and enabled */</span>
+rightMaster.<span class="fu">configForwardSoftLimitThreshold</span>(<span class="dv">10000</span>, <span class="dv">0</span>);
+rightMaster.<span class="fu">configReverseSoftLimitThreshold</span>(-<span class="dv">10000</span>, <span class="dv">0</span>);
+rightMaster.<span class="fu">configForwardSoftLimitEnable</span>(<span class="kw">true</span>, <span class="dv">0</span>);
+rightMaster.<span class="fu">configReverseSoftLimitEnable</span>(<span class="kw">true</span>, <span class="dv">0</span>);</code></pre>
+<p>LabVIEW -</p>
+<div class="figure">
+<img src="images/LV-softLimits.png" />
+</div>
+<h6 id="override-the-soft-limit-enable">Override the Soft Limit Enable</h6>
+<p>After the soft limits have been configured, at any point you can override the enable to turn the soft limit functionality off.</p>
+<p>LabVIEW -</p>
+<div class="figure">
+<img src="images/LV-softLimOverride.png" />
+</div>
+<h5 id="closed-loop-ramping">Closed-loop Ramping</h5>
+<h5 id="closed-loopfirmware-control-modes">Closed-loop/Firmware Control Modes</h5>
+<p>When it comes to the Talon SRX and Victor SPX, there are multiple closed-loop control mode options to choose from. Below is a list with an explanation of each supported closed-loop type.</p>
+<p><strong>Position closed-loop</strong> The Talon's closed-loop logic can be used to maintain a target position. Target and sampled position is passed into the equation in native units.</p>
+<p><strong>Velocity closed-loop</strong> The Talon's closed-loop logic can be used to maintain a target velocity. Target and sampled velocity is passed into the equation in native units per 100ms.</p>
+<p><strong>Current closed-loop</strong> The Talon's closed-loop logic can be used to approach a target current-draw. Target and sampled current is passed into the equation in milliamperes.</p>
+<p>Note: Current Control Mode is separate from Current Limit. Current limit can be found <a href="#current-limiting">here</a>.</p>
+<p><strong>Motion Magic</strong> Talon will closed-loop to target position while honoring an maximum &quot;cruise&quot; velocity and specified acceleration.</p>
+<p><strong>Motion Magic (Arc)</strong> This is an advanced control mode that will allow for simultaneous servoing of a distance and heading. This will be released in a future update.</p>
+<p><strong>Motion profiling / Motion profiling (Arc)</strong> With this, a savvy developer can actually stream motion profile trajectory points into the Talon’s internal buffer (even while executing the profile). This allows fine control of position and speed throughout the entire movement.</p>
+<p>This feature is being reimplemented to allow for simulataneous servoing of a distance and heading (using Pigeon IMU) and will be released shortly.</p>
+<h6 id="position-closed-loop-walkthrough">Position closed-loop walkthrough</h6>
+<p>Below is a full example for position closed-looping using the HERO development board. These functions are also available in FRC C++/Java, and comparable VIs are available in LabVIEW. The position closed-loop examples can also be found below. Java -</p>
+<h6 id="current-closed-loop-walkthrough">Current closed-loop walkthrough</h6>
+<p>Coming soon. This exists in last year's documentation and will be merge in accordingly.</p>
+<h5 id="closed-loop-gains">Closed-loop Gains</h5>
+<p>When tuning gains, it is recommended to zero out all closed-loop control parameters and start with P (or F if recommended for the control mode). ###### Motor Output Units (Why 1023?) Motor output is represented as a 11-bit number in firmware. All units for motor output are a scalar from -1023 to +1023. ###### Closed-loop Error Closed-loop error is the difference between the target setpoint and the current sensor value.<br />For position: closed-loop error = target - sensor position.<br />For velocity: closed-loop error = target - sensor velocity. ###### Feed-Forward (kF) Feed-Forward is typically used in velocity and motion profile/magic closed-loop modes.</p>
+<p>F gain is multiplied directly by the set point passed into the programming API. The result of this multiplication is in motor output units [-1023, 1023]. This allows the robot to feed-forward using the target set-point.</p>
+<p>In order to calculate feed-forward, you will need to measure your motor's velocity at a specified percent output (preferably an output close to the intended operating range).</p>
+<p>You can see the measured velocity in a few different ways. The fastest is to usually do a self-test in the web-based interface - This will give you both your velocity and your percent output.</p>
+<div class="figure">
+<img src="images/General-FgainVelSelfTest.png" />
+</div>
+<p>F-gain is then calculated using the following formula:</p>
+<p>F-gain = ([Percent Output] x 1023) / [Velocity]</p>
+<p>Using the example from the self-test picture above, that would be:<br /> F-gain = (0.48 x 1023) / 6331 = 0.077561</p>
+<p>We can then check our math - if the target velocity is set to 6331 native units per 100ms, the closed-loop output will be (0.077561 x 6331) = 491 (which is 48% of 1023). ###### Proportional (kP) P is the proportional gain. It modifies the closed-loop output by a proportion (the gain value) of the closed-loop error.</p>
+<p>P gain is specified in output unit per error unit. For example, a value of 102 is ~9.97% (which is 102/1023) output per 1 unit of Closed-Loop Error.</p>
+<p><em>Example: Position Closed-loop</em><br /> When tuning P, it's useful to estimate your starting value. If you want your mechanism to drive 50% output when the error is 4096 (one rotation when using CTRE Mag Encoder), then the calculated Proportional Gain would be (0.50 X 1023) / 4096 = ~0.125.</p>
+<p>To check our math, take an error (native units) of 4096 X 0.125 =&gt; 512 (50% output).</p>
+<p>Tune this until the sensed value is close to the target under typical load. Many prefer to simply double the P-gain until oscillations occur, then reduce accordingly. ###### Integral (kI) I is the integral gain. It modifies the closed-loop output according to the integral error (summation of the closed-loop error each iteration).</p>
+<p>I gain is specified in output units per integrated error. For example, a value of 10 equates to ~0.97% for each accumulated error (Integral Accumulator). Integral accumulation is done every 1ms.</p>
+<p><em>Example: Position Closed-loop</em><br /> If your mechanism never quite reaches your target and using integral gain is viable, start with 1/100th of the Proportional Gain. ###### Derivative (kD) D is the derivative gain. It modifies the closed-loop output according to the derivative error (change in closed-loop error each iteration).</p>
+<p>D gain is specified in output units per derivative error. For example a value of 102 equates to ~9.97% (which is 102/1023) per change of Sensor Position/Velocity unit per 1ms.</p>
+<p><em>Example: Position Closed-loop</em><br /> If your mechanism accelerates too abruptly, Derivative Gain can be used to smooth the motion. Typically start with 10x to 100x of your current Proportional Gain.</p>
+<h5 id="i-want-to-process-the-sensor-myself-how-do-i-do-that">I Want to process the sensor myself, How do I do that?</h5>
+<p>All sensor data is reported periodically on the CAN Bus. The frames periods can be modified by using the setStatusFramePeriod functions of the Java/C++ objects, and the &quot;Set Status Frame&quot; Vis in LabVIEW.</p>
+<h3 id="multi-purposesensor-devices">Multi-purpose/sensor Devices</h3>
+<h4 id="pigeon-imu">Pigeon IMU</h4>
+<h5 id="where-to-begin">Where to begin?</h5>
+<p>Documentation will be updated soon.<br />In the meantime the pre-Phoenix API is relatively close. See the software portion of the User's Guide. <a href="http://www.ctr-electronics.com/gadgeteer-imu-module-pigeon.html#product_tabs_technical_resources">Pigeon Tech Resources</a> Additionally the example repositories can be used for reference. <a href="https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages">Phoenix-Examples-Languages</a> <a href="https://github.com/CrossTheRoadElec/Phoenix-Examples-LabVIEW">Phoenix-Examples-LabVIEW</a></p>
+<h4 id="canifier">CANifier</h4>
+<p>Documentation will be updated soon.<br />In the meantime the pre-Phoenix API is relatively close. See the software portion of the User's Guide. <a href="http://www.ctr-electronics.com/can-can-canifier-driver-led-driver-gpio.html#product_tabs_technical_resources">CANifier Tech Resources</a> Additionally the example repositories can be used for reference. <a href="https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages">Phoenix-Examples-Languages</a> <a href="https://github.com/CrossTheRoadElec/Phoenix-Examples-LabVIEW">Phoenix-Examples-LabVIEW</a></p>
+<h3 id="common-device-api">Common Device API</h3>
+<p>The Talon SRX, Victor SPX, CANifier, and Pigeon IMU have a common set of device functions. These are explained below.</p>
+<h4 id="error-handling">Error handling</h4>
+<p>In C++/Java, many routines return an <a href="http://www.ctr-electronics.com/downloads/api/java/html/com/ctre/phoenix/ErrorCode.html">ErrorCode</a>. Depending on the function, this can be used to determine if the function was successful.</p>
+<p>Additionally each object has a getLastError() routine that will return the code for the last function called.</p>
+<p>In LabVIEW, the error output is filled with a CTRE error code when an error condition occurs.</p>
+<p>In all circumstances, error events are also sent to the Driver Station console output. However Driver Station messages are debounced to reduce flooding the console.</p>
+<h4 id="did-my-device-reset">Did my device reset?</h4>
+<p>All device classes and VIs support a <code>hasResetOccurred</code> routine that allows the caller to poll if the device has reset since last call. Additionally, Talon SRX and Victor SPX have a sticky fault (accessible via web-based config or API) to indicate if the motor controller has been reset/power-booted during robot-enable.</p>
+<h4 id="configuration-parameters">Configuration Parameters</h4>
+<p>In addition to the feature specific config* routines/VIs in C++/Java/LabVIEW, there are general Config Parameter routines that will take an arbitrary enumeration value type <a href="http://www.ctr-electronics.com/downloads/api/java/html/com/ctre/phoenix/ParamEnum.html">ParamEnum</a>.</p>
+<p>When using the general configuration get/set routines, <code>ordinal</code> can be used to specify... - which PID slot to select (when accessing gains). - which PID loop to select (when accessing PID signals such as integral accumulator) - which limit switch direction, 0 for forward, 1 for reverse (when accessing limit parameters)</p>
+<p>Every language supports a <a href="http://www.ctr-electronics.com/downloads/api/java/html/com/ctre/phoenix/motorcontrol/can/BaseMotorController.html#configGetParameter-com.ctre.phoenix.ParamEnum-int-int-">ConfigGetParameter</a> and <a href="http://www.ctr-electronics.com/downloads/api/java/html/com/ctre/phoenix/motorcontrol/can/BaseMotorController.html#configSetParameter-com.ctre.phoenix.ParamEnum-double-int-int-int-">ConfigSetParameter</a>.</p>
+<h4 id="configuration-parameters---what-is-timeout-for">Configuration Parameters - What is timeout for?</h4>
+<p>All config* routines in the C++/Java require a timeoutMs parameter. When set to a non-zero value, the config routine will wait for an acknowledgement from the device before returning. If the timeout is exceeded, an error code is generated and a Driver Station message is produced. When set to zero, no checking is performed (identical behavior to the CTRE v4 Toolsute).</p>
+<h2 id="software-object-model">Software Object Model</h2>
+<h3 id="wpilib-speedcontrollerdrivetrain-objects">WPILib SpeedController/Drivetrain Objects</h3>
+<p>The Phoenix framework supports an adapter class for Victor SPX and Talon SRX hardware objects. Depending on language, the developer needs to be made aware of the following sections below to utilize certain WPILIB classes/VIs.</p>
+<h4 id="wpilib-javac">WPILib: Java/C++</h4>
+<p>The WPI_TalonSRX and WPI_VictorSPX classes implement several WPILIB interfaces.<br />WPILIB motor controllers generally support... - Live Window/Sendable features - Test Mode - Motor Safety - SpeedController interface (which assumes motor controller is &quot;simple&quot;) - a single parameter set(), (which assume motor controller is &quot;simple&quot;)</p>
+<p>WPI_TalonSRX and WPI_VictorSPX can also be subclassed/forked/modified for advanced teams that want to use the WPILIB drivetrain classes (which are primarily designed for simple motor controllers), while using the advanced features of the Talon/Victor.</p>
+<p>Additionally future release of Phoenix will include CTRE developed drivetrain objects that natively support our motor controllers.</p>
+<h4 id="wpilib-labview">WPILib: LabVIEW</h4>
+<p>LabVIEW's NI/WPILIB objects will natively work the Talon SRX/Victor SPX motor references. Using the WPI Motor Set VI in Teleop.vi:</p>
+<div class="figure">
+<img src="images/LV-victorWPIset.png" />
+</div>
+<p>Opening Multiple Motors for a Drivetrain in Begin.vi:</p>
+<div class="figure">
+<img src="images/LV-open4motors.png" />
+</div>
+<h2 id="driver-station"><strong>Driver Station</strong></h2>
+<h3 id="what-do-i-do-when-i-see-errors-in-driver-station">What do I do when I see errors in Driver Station?</h3>
+<p>DS Errors should be addressed as soon as they appear. This is because... - Phoenix API will report if a device is missing, not functioning, has too-old firmware, etc. - If errors are numerous and typical, then users cannot determine if there is a new problem to address. - A large stream of errors can bog down the Driverstation/roboRIO. Phoenix Framework has a debouncing strategy to ensure this does not happen, but not all libraries do this.</p>
+<p>Phoenix DS errors occur on call. Meaning VIs/API functions must be called in robot code for any errors to occur. When an error does occur, a stack trace will report where in the robot code to look.</p>
+<h3 id="driver-station-says-the-firmware-is-too-old.">Driver Station says the firmware is too old.</h3>
+<div class="figure">
+<img src="images/DS-FirmwareTooOld.png" alt="DS-FirmwareTooOld" /><p class="caption">DS-FirmwareTooOld</p>
+</div>
+<p>Use the web-based configuration page to <a href="#update-your-can-devices">update</a> the firmware of the device.</p>
+<p>Note that the robot application must be <strong>restarted</strong> for the firmware version check to clear. This can be done by redeploying the robot application or simply restarting the robot.</p>
+<h3 id="driver-station-says-the-firmware-could-not-be-retrieved-and-to-check-the-firmware-and-id.">Driver Station says the firmware could not be retrieved and to check the firmware and ID.</h3>
+<div class="figure">
+<img src="images/DS-FirmwareNotReceived.png" alt="DS-FirmwareNotReceived" /><p class="caption">DS-FirmwareNotReceived</p>
+</div>
+<p>This usually indicates that your device ID is wrong or your firmware pre-dates Phoenix.</p>
+<p>Use the web-based configuration page to check your device IDs and make sure your firmware is <a href="#update-your-can-devices">up-to-date</a>.</p>
+<h3 id="labview---driver-station-says-variant-to-data-in-...">LabVIEW - Driver Station Says Variant To Data in ...</h3>
+<div class="figure">
+<img src="images/DS-VariantToData.png" />
+</div>
+<p>This is usually caused by a diagram disable structure around a MotorController or EnhancedMotorController VI</p>
+<div class="figure">
+<img src="images/LV-DiagramDisable.png" />
+</div>
+<p>In order to fix this, you must wire the device reference through the enabled state of the diagram disabled block</p>
+<div class="figure">
+<img src="images/LV-DiagramDisableError.png" />
+</div>
+<div class="figure">
+<img src="images/LV-DiagramDisableFix.png" />
+</div>
+<h2 id="crf-firmware-versions"><strong>CRF Firmware Versions</strong></h2>
+<p>Phoenix 5.2.1.1: - Pigeon-Application-0.41-FixedParamResp.crf - CANifier-Application-0.40-FirmVers.crf - <strong>TalonSrx-Application-3.3.crf</strong> (Motion Profile added). - VictorSpx-Application-3.1.crf</p>
+<p>Phoenix 5.1.3.1: - Pigeon-Application-0.41-FixedParamResp.crf - CANifier-Application-0.40-FirmVers.crf - TalonSrx-Application-3.1.crf - VictorSpx-Application-3.1.crf</p>
+<h2 id="errata"><strong>Errata</strong></h2>
+<p>Phoenix 5.2.1.1: - getClosedLoopTarget reports in units of milliamperes when in current closed-loop mode.</p>
+<p>Phoenix 5.1.3.1: - Talon SRX/ Victor SPX motion-profile mode is not available in the kickoff release. This is due to the modifications done to support Pigeon IMU integration. This will be remedied in a future release. [Resolved in 5.2.1.1]</p>
+<p>LabVIEW: Do not use SET VI when using follwer features in LabVIEW.<br />Instead use the FOLLOW VI documented in this <a href="https://github.com/CrossTheRoadElec/Phoenix-Documentation#follower">section</a>.<br /><img src="images/LV-FollowTalon.png" /></p>
