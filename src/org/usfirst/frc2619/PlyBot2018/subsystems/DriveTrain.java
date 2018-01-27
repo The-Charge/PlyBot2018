@@ -121,11 +121,11 @@ public class DriveTrain extends Subsystem {
     public void run(double leftSpeed, double rightSpeed) {
     	if (isReversed) {
     		leftFrontMotor.set(-leftSpeed);
-    	    rightFrontMotor.set(rightSpeed);
+    	    rightFrontMotor.set(-rightSpeed);
     	}
     	else {
     		leftFrontMotor.set(leftSpeed);
-    	    rightFrontMotor.set(-rightSpeed);
+    	    rightFrontMotor.set(rightSpeed);
     	}
     	
     	SmartDashboard.putNumber("Encoder", pot.get());
