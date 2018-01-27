@@ -70,6 +70,7 @@ public class RobotMap {
         driveTrainLeftRearMotor.follow(driveTrainLeftFrontMotor);
         driveTrainRightRearMotor.follow(driveTrainRightFrontMotor);
         driveTrainRightFrontMotor.setInverted(true);
+        driveTrainRightRearMotor.setInverted(true);
 		driveTrainAHRS = new AHRS(Port.kMXP);
     }
 }
