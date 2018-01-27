@@ -54,11 +54,11 @@ public class Claw extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void openClaw() {
-    	clawSolenoid.set(true);
+    	solenoid.set(true);
     }
     
     public void closeClaw() {
-    	clawSolenoid.set(false);
+    	solenoid.set(false);
     }
 
 }
