@@ -73,7 +73,7 @@ public class TurnNDegreesRelativePID extends PIDCommand {
     	//if pid output is lower than minSpeed, set it to minSpeed
 
         RobotMap.driveTrainLeftFrontMotor.pidWrite(finalOutput);
-        RobotMap.driveTrainRightFrontMotor.pidWrite(finalOutput);
+        RobotMap.driveTrainRightFrontMotor.pidWrite(-finalOutput);
         //PIDContoller automatically finds the shortest angle to setpoint
     }
 
