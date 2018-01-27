@@ -53,6 +53,13 @@ public class Collector extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+    public void run(double speed) {
+    	RobotMap.collectorMotor.set(speed);
+    }
+    
+    public void stop() {
+    	RobotMap.collectorMotor.set(0.0);
+    }
 
 }
 
