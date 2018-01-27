@@ -168,7 +168,7 @@ public class DriveTrain extends Subsystem {
     	
     	MotionMagicDistance *= TICKS_PER_FOOT;
     	leftFrontMotor.set(ControlMode.MotionMagic, MotionMagicDistance);
-    	rightFrontMotor.set(ControlMode.MotionMagic, -MotionMagicDistance);
+    	rightFrontMotor.set(ControlMode.MotionMagic, MotionMagicDistance);
     }
     
     public boolean isAtPIDDestination() {
