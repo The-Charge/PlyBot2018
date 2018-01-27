@@ -191,8 +191,8 @@ public class DriveTrain extends Subsystem {
 		leftFrontMotor.selectProfileSlot(1, 0);
 		rightFrontMotor.selectProfileSlot(1, 0);
 
-		leftFrontMotor.configNominalOutputForward(1, RobotMap.TIMEOUT_MS);
-		rightFrontMotor.configNominalOutputForward(1, RobotMap.TIMEOUT_MS);
+		//leftFrontMotor.configNominalOutputForward(1, RobotMap.TIMEOUT_MS);
+		//rightFrontMotor.configNominalOutputForward(1, RobotMap.TIMEOUT_MS);
 	}
 }
 
