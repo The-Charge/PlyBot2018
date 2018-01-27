@@ -132,22 +132,6 @@ Children:
           default: '0'
           name: Output Channel (Solenoid)
           validators: *id004
-          value: '1'
-        Output PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id005
-          default: '0'
-          name: Output PCM (Solenoid)
-          validators: *id006
-          value: '0'
-      Base: Solenoid
-      Name: LeftPiston
-    - Children: []
-      Properties:
-        Output Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id003
-          default: '0'
-          name: Output Channel (Solenoid)
-          validators: *id004
           value: '2'
         Output PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id005
@@ -156,7 +140,7 @@ Children:
           validators: *id006
           value: '0'
       Base: Solenoid
-      Name: RightPiston
+      Name: Solenoid
     Properties:
       Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Send to SmartDashboard, validators: null, value: false}
