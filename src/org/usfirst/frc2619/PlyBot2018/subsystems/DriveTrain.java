@@ -17,6 +17,7 @@ import org.usfirst.frc2619.PlyBot2018.RobotMap;
 import org.usfirst.frc2619.PlyBot2018.commands.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.kauailabs.navx.frc.AHRS;
@@ -139,6 +140,14 @@ public class DriveTrain extends Subsystem {
     	rightFrontMotor.set(0);
     }
     
+    public void setControlMode(ControlMode newControlMode) {
+    	currentControlMode = newControlMode;
+    }
+    
+	public ControlMode getControlMode() {
+		return currentControlMode;
+	}
+    
     public void MotionMagicInit(double distance) {
     	MotionMagicDistance = distance;
     	leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
@@ -190,12 +199,5 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putBoolean("isFinished", isAtPIDDestination());
     }
 
-	public ControlMode getControlMode() {
-		return currentControlMode;
-	}
-
-	public void setControlMode(ControlMode controlMode) {
-		currentControlMode = controlMode;
-	}
 }
 
