@@ -50,8 +50,8 @@ public class TankDrive extends Command {
     	double rightSpeed, leftSpeed;
     	rightSpeed = -Robot.oi.rightJoystick.getY();
     	leftSpeed = -Robot.oi.leftJoystick.getY();
-    	rightSpeed = MathUtil.adjSpeed(rightSpeed);
-    	leftSpeed = MathUtil.adjSpeed(leftSpeed);
+    	//rightSpeed = MathUtil.adjSpeed(rightSpeed);
+    	//leftSpeed = MathUtil.adjSpeed(leftSpeed);
     	Robot.driveTrain.run(leftSpeed, rightSpeed);
     }
 

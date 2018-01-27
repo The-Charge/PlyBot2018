@@ -117,8 +117,8 @@ public class DriveTrain extends Subsystem {
     }
 
     public void run(double leftSpeed, double rightSpeed) {
-    	leftFrontMotor.set(leftSpeed);
-    	rightFrontMotor.set(-rightSpeed);
+    	leftFrontMotor.set(ControlMode.PercentOutput, leftSpeed);
+    	rightFrontMotor.set(ControlMode.PercentOutput, -rightSpeed);
     	SmartDashboard.putNumber("Encoder", pot.get());
     	SmartDashboard.putNumber("Encoder Position Left", leftFrontMotor.getSelectedSensorPosition(0));
     	SmartDashboard.putNumber("Encoder Position Right", rightFrontMotor.getSelectedSensorPosition(0));
