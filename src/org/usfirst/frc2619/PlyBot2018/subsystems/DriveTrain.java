@@ -72,6 +72,8 @@ public class DriveTrain extends Subsystem {
 	public final double TURN_INNER_SPEED_DEFAULT = -0.5;
 
     public boolean isReversed = false;
+    
+    public boolean driveLocked = false;
 	
     @Override
     public void initDefaultCommand() {
@@ -120,14 +122,37 @@ public class DriveTrain extends Subsystem {
     }
 
     public void run(double leftSpeed, double rightSpeed) {
-    	if (isReversed) {
-    		leftFrontMotor.set(-leftSpeed);
-    	    rightFrontMotor.set(-rightSpeed);
-    	}
+    	//if (isReversed) {
+    		//leftFrontMotor.set(-leftSpeed);
+    	    //rightFrontMotor.set(-rightSpeed);
+    	//}
+    	//else {
+    		//leftFrontMotor.set(leftSpeed);
+    	    //rightFrontMotor.set(rightSpeed);
+    	//}
+    	
+    	if (driveLocked) {
+			double avSpeed = (leftSpeed + rightSpeed) / 2.0;
+			leftSpeed = avSpeed;
+			rightSpeed = avSpeed;
+			if (!isReversed) {
+				leftFrontMotor.set(leftSpeed);
+				rightFrontMotor.set(rightSpeed);
+			} 
+			else {
+				leftFrontMotor.set(-1 * leftSpeed);
+				rightFrontMotor.set(-1 * rightSpeed);
+			}
+		} 
+    	else if (!isReversed) {
+			leftFrontMotor.set(leftSpeed);
+			rightFrontMotor.set(rightSpeed);
+
+		} 
     	else {
-    		leftFrontMotor.set(leftSpeed);
-    	    rightFrontMotor.set(rightSpeed);
-    	}
+			leftFrontMotor.set(-1 * leftSpeed);
+			rightFrontMotor.set(-1 * rightSpeed);
+		}
     	
     	SmartDashboard.putNumber("Encoder", pot.get());
     	SmartDashboard.putNumber("Encoder Position Left", leftFrontMotor.getSelectedSensorPosition(0));
