@@ -40,6 +40,9 @@ public class ElevateToXFeet extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+    	this.setTimeout(1.5);
+    	Robot.elevator.setSetPoint(m_feet/Robot.elevator.TICKS_PER_FOOT);
+    	Robot.elevator.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -50,17 +53,19 @@ public class ElevateToXFeet extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return isTimedOut() || Robot.elevator.onTarget();
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
+    	Robot.elevator.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+    	end()
     }
 }
