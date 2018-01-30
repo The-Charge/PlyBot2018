@@ -736,7 +736,7 @@ Children:
         value: *id010
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
-    Base: Instant Command
+    Base: Command
     Name: ToggleLockStraight
   Properties: {}
   Base: Commands
