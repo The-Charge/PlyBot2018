@@ -910,23 +910,54 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: DriveTrain}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id014
+        default: []
+        name: Parameter presets
+        validators: null
+        value:
         - !!robotbuilder.data.properties.ParameterSet
           name: '0.1'
           parameters:
           - {name: Speed, type: double, value: '0.1'}
-        name: Parameter presets
-        validators: null
-        value: *id014
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: DriveToCurrent
+  - Children: []
+    Properties:
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value:
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: rawAuton, type: String}
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: None}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: []
+        name: Parameter presets
+        validators: null
+        value:
+        - !!robotbuilder.data.properties.ParameterSet
+          name: Star
+          parameters:
+          - {name: rawAuton, type: String, value: 72dg5ft-90dg5ft162dg5ft-72dg5ft-162dg5ft}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: Rectangle
+          parameters:
+          - {name: rawAuton, type: String, value: 5ft270dg2ft180dg5ft90dg2ft}
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Command
+    Name: AutonStructure
   Properties: {}
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\yaand\workspace',
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\jrkli\workspace',
     extension: null, folder: true, name: Eclipse Workspace, validators: null, value: 'C:\workspace'}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
@@ -945,7 +976,7 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\yaand\',
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\jrkli\',
     extension: null, folder: true, name: Wiring file location, validators: null, value: 'C:\workspace\PlyBot2018'}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}

@@ -86,8 +86,10 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        autonomousCommand = chooser.getSelected();
-        // schedule the autonomous command (example)
+    	String rawAuton = "";
+        //autonomousCommand = chooser.getSelected();
+        SmartDashboard.getString("AutonPathInstructions", rawAuton);
+        new AutonStructure(rawAuton);
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
