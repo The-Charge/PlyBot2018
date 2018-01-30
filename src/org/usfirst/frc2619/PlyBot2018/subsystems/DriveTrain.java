@@ -140,7 +140,7 @@ public class DriveTrain extends Subsystem {
 
     public void setSpeedPID(double setSpeed) {
 		leftFrontMotor.set(ControlMode.Velocity, MAX_TICKS_PER_SECOND * setSpeed);
-		rightFrontMotor.set(ControlMode.Velocity, -MAX_TICKS_PER_SECOND * setSpeed);
+		rightFrontMotor.set(ControlMode.Velocity, MAX_TICKS_PER_SECOND * setSpeed);
 		SmartDashboard.putNumber("Current", Robot.driveTrain.getCurrent());
 	}
     
