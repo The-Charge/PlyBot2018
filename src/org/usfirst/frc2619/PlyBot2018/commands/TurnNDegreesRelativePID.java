@@ -84,7 +84,7 @@ public class TurnNDegreesRelativePID extends PIDCommand {
     	previousControlMode = Robot.driveTrain.getControlMode();
 		initial = RobotMap.driveTrainAHRS.getAngle();
 		RobotMap.driveTrainAHRS.setAngleAdjustment(-initial);
-		//^^^ I think this essentially sets initial angle to 0; whenever it returns the current angle,
+		//^^^ this sets initial angle to 0; whenever it returns the current angle,
 		//it adds -initial to it, then resets it when the turn is finished.
 		getPIDController().setSetpoint(m_nDegrees);
 		Robot.driveTrain.setControlMode(ControlMode.PercentOutput);
