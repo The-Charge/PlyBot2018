@@ -46,7 +46,6 @@ public class TankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	SmartDashboard.putNumber("Current Time", System.currentTimeMillis());
     	double rightSpeed, leftSpeed;
     	rightSpeed = -Robot.oi.rightJoystick.getY();
     	leftSpeed = -Robot.oi.leftJoystick.getY();

@@ -50,7 +50,6 @@ public class TurnNDegreesAbs extends Command {
     @Override
     protected void initialize() {
     	initialYaw = Robot.driveTrain.getYaw();
-    	SmartDashboard.putNumber("Initial Yaw", initialYaw);
     	if ((initialYaw <= 0 && m_Angle <= 0) || (initialYaw <= 0 && m_Angle <= 0)) {
     		degreeChange = m_Angle - initialYaw;
     	}
@@ -66,7 +65,6 @@ public class TurnNDegreesAbs extends Command {
     		else
     			degreeChange = -360 + (m_Angle - initialYaw);
     	}
-    	SmartDashboard.putNumber("Degree Change", degreeChange);
     }
 
     // Called repeatedly when this Command is scheduled to run

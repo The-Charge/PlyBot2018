@@ -141,7 +141,6 @@ public class DriveTrain extends Subsystem {
     public void setSpeedPID(double setSpeed) {
 		leftFrontMotor.set(ControlMode.Velocity, MAX_TICKS_PER_SECOND * setSpeed);
 		rightFrontMotor.set(ControlMode.Velocity, -MAX_TICKS_PER_SECOND * setSpeed);
-		SmartDashboard.putNumber("Current", Robot.driveTrain.getCurrent());
 	}
     
 
@@ -177,10 +176,6 @@ public class DriveTrain extends Subsystem {
 			leftFrontMotor.set(-1 * leftSpeed);
 			rightFrontMotor.set(-1 * rightSpeed);
 		}
-    	
-    	SmartDashboard.putNumber("Encoder", pot.get());
-    	SmartDashboard.putNumber("Encoder Position Left", leftFrontMotor.getSelectedSensorPosition(0));
-    	SmartDashboard.putNumber("Encoder Position Right", rightFrontMotor.getSelectedSensorPosition(0));
     }
     
     
@@ -246,6 +241,14 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("PostRun", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
     	SmartDashboard.putString("Control Mode", leftFrontMotor.getControlMode().toString());
     	SmartDashboard.putBoolean("isFinished", isAtPIDDestination());
+    	SmartDashboard.putNumber("Current", Robot.driveTrain.getCurrent());
+    	SmartDashboard.putNumber("Encoder", pot.get());
+    	SmartDashboard.putNumber("Encoder Position Left", leftFrontMotor.getSelectedSensorPosition(0));
+    	SmartDashboard.putNumber("Encoder Position Right", rightFrontMotor.getSelectedSensorPosition(0));
+    	SmartDashboard.putNumber("Deadband", .1);
+		SmartDashboard.putNumber("Root", 1);
+		SmartDashboard.putNumber("Power", 3);
+		SmartDashboard.putNumber("Current Time", System.currentTimeMillis());
     }
 
 	public void initSpeedMode() {
