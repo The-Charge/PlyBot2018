@@ -52,6 +52,9 @@ public class Shoulder extends Subsystem {
         // Put code here to be run every loop
 
     }
+    public void stop() {
+    	
+    }
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
