@@ -45,8 +45,7 @@ public class DriveXFeetPID extends Command {
     @Override
     protected void initialize() {
     	Robot.driveTrain.setEncoderPosition(0);
-    	Robot.driveTrain.setDistanceTarget(ticks);
-    	Robot.driveTrain.driveXFeet_PID();
+    	Robot.driveTrain.driveXFeet_PID(ticks);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -57,7 +56,7 @@ public class DriveXFeetPID extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return Robot.driveTrain.isAtTarget();
+        return Robot.driveTrain.isAtTarget(ticks);
     }
 
     // Called once after isFinished returns true
