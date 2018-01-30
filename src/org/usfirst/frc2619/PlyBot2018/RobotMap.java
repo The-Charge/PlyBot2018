@@ -74,7 +74,7 @@ public class RobotMap {
         collectorMotor = new WPI_TalonSRX(6);
         
         
-        elevatorMotor = new WPI_TalonSRX(0);
+        elevatorMotor = new WPI_TalonSRX(4);
         
         
         elevatorQuadratureEncoder = new Encoder(0, 1, false, EncodingType.k4X);
