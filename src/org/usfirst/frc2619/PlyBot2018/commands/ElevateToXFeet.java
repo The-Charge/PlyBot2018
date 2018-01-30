@@ -42,7 +42,7 @@ public class ElevateToXFeet extends Command {
     protected void initialize() {
     	this.setTimeout(1.5);
     	Robot.elevator.setSetPointFeet(m_feet);
-    	Robot.elevator.getPIDController().enable();
+    	Robot.elevator.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -59,7 +59,7 @@ public class ElevateToXFeet extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    	Robot.elevator.getPIDController().disable();
+    	Robot.elevator.disable();
     }
 
     // Called when another command which requires one or more of the same

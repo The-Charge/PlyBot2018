@@ -160,7 +160,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '4'
+          value: '5'
       Base: Talon SRX
       Name: Motor
     - Children: []
@@ -180,7 +180,7 @@ Children:
           default: kRate
           name: PID Source
           validators: null
-          value: kRate
+          value: kDisplacement
         Encoding Type: !!robotbuilder.data.properties.ChoicesProperty
           choices: [k4X, k2X, k1X]
           default: k4X
