@@ -67,19 +67,34 @@ public class DriveTrain extends Subsystem {
     	Robot.driveTrain.run(0, 0);
     }
     
+    public void driveXFeet_PID() {
+    	leftFrontMotor.set(leftFrontMotor.getControlMode().Position, value);
+    	rightFrontMotor.set(rightFrontMotor.getControlMode().Position, value); //set control mode value?
+    	
+    	leftFrontMotor.selectProfileSlot(slotIdx, pidIdx); //both ints
+    	leftFrontMotor.selectProfileSlot(slotIdx, pidIdx);
+    	
+    	leftFrontMotor.config_kP(value, 10);
+    	leftFrontMotor.config_kI(value, 10);
+    	leftFrontMotor.config_kD(value, 10);
+    	leftFrontMotor.config_kF(value, 10);
+    }
+    
     public int getEncoderPosition() {
     	return leftFrontMotor.getSensorCollection().getQuadraturePosition();
     }
     
-    /*public void setDistanceTarget(double distanceInFeet){
-    	double distanceInTicks = distanceInFeet * TICKSPERFOOT;
-    	
-    	//set distance
-    	leftFrontMotor.set(distanceInTicks);
-    	rightFrontMotor.set(-1*distanceInTicks);
-    }*/	
+    public void setDistanceTarget(double distance){
+    	leftFrontMotor.set(distance);
+    	rightFrontMotor.set(-distance);
+    	//how to make control mode variable?
+    }
     
-    public boolean isAtTarget() {
+    public void setEncoderPosition(int value) {
+    	leftFrontMotor.getSensorCollection().setQuadraturePosition(value, 10);
+    }
+    
+    public boolean isAtTarget(int distance) {
     	return false;
     }
 }
