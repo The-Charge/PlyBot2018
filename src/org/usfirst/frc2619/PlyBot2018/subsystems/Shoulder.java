@@ -53,7 +53,7 @@ public class Shoulder extends Subsystem {
 
     }
     public void stop() {
-    	
+    	shoulderMotor.disable();
     }
 
     // Put methods for controlling this subsystem
