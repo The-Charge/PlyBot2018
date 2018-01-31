@@ -145,15 +145,7 @@ public class DriveTrain extends Subsystem {
     
 
     public void run(double leftSpeed, double rightSpeed) {
-    	//if (isReversed) {
-    		//leftFrontMotor.set(-leftSpeed);
-    	    //rightFrontMotor.set(-rightSpeed);
-    	//}
-    	//else {
-    		//leftFrontMotor.set(leftSpeed);
-    	    //rightFrontMotor.set(rightSpeed);
-    	//}
-    	
+    	setPercentVBus();
     	if (driveLocked) {
 			double avSpeed = (leftSpeed + rightSpeed) / 2.0;
 			leftSpeed = avSpeed;
@@ -184,6 +176,7 @@ public class DriveTrain extends Subsystem {
     
     
     public void stop() {
+    	//setPercentVBus();
     	leftFrontMotor.set(0);
     	rightFrontMotor.set(0);
     }
