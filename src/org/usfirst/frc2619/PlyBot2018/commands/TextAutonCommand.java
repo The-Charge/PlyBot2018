@@ -63,11 +63,11 @@ public class TextAutonCommand extends CommandGroup {
 	    	if(locDG > locFT) {
 	    		//these do not happen
 	    		addSequential(new DriveXFeetMotionMagic(Integer.parseInt(rawAuton.substring(0, locFT))));
-	    		rawAuton = rawAuton.substring(locFT+2);
+	    		rawAuton = rawAuton.substring(locFT+3);
 	    	}
 	    	else {
 	    		addSequential(new TurnNDegreesAbsolutePID(Integer.parseInt(rawAuton.substring(0, locDG))));
-	    		rawAuton = rawAuton.substring(locDG+2);
+	    		rawAuton = rawAuton.substring(locDG+3);
 	    	}
     	}
     } 

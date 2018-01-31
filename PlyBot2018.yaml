@@ -934,51 +934,20 @@ Children:
         - !!robotbuilder.data.properties.ParameterDescriptor {name: rawAuton, type: String}
       Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Run When Disabled, validators: null, value: false}
-      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Requires, type: Subsystem, validators: null, value: None}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
         default: []
         name: Parameter presets
         validators: null
         value:
         - !!robotbuilder.data.properties.ParameterSet
-          name: Star
-          parameters:
-          - {name: rawAuton, type: String, value: 72dg5ft-90dg5ft162dg5ft-72dg5ft-162dg5ft}
-        - !!robotbuilder.data.properties.ParameterSet
           name: Rectangle
           parameters:
-          - {name: rawAuton, type: String, value: 5ft270dg2ft180dg5ft90dg2ft}
-      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
-        name: Button on SmartDashboard, validators: null, value: true}
-    Base: Command
-    Name: AutonStructure
-  - Children: []
-    Properties:
-      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
-        name: Autonomous Selection, validators: null, value: false}
-      Parameters: !!robotbuilder.data.properties.ParametersProperty
-        default: []
-        name: Parameters
-        validators: null
-        value:
-        - !!robotbuilder.data.properties.ParameterDescriptor {name: rawAuton, type: String}
-      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
-        name: Run When Disabled, validators: null, value: false}
-      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id014
-        - !!robotbuilder.data.properties.ParameterSet
-          name: Rectangle
-          parameters:
-          - {name: rawAuton, type: String, value: 5ft270dg2ft180dg5ft90dg2ft}
-        name: Parameter presets
-        validators: null
-        value: *id014
+          - {name: rawAuton, type: String, value: '5ft,-90dg,2ft,180dg,5ft,90dg,2ft,'}
       Commands: !!robotbuilder.data.properties.ListProperty
-        default: &id015 []
+        default: []
         name: Commands
         validators: [List]
-        value: *id015
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group

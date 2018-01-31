@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
     	String rawAuton = "";
         //autonomousCommand = chooser.getSelected();
         SmartDashboard.getString("AutonPathInstructions", rawAuton);
-        new AutonStructure(rawAuton);
+        //autonomousCommand = TextAutonCommand(rawAuton);
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
