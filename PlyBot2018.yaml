@@ -943,6 +943,10 @@ Children:
           name: Rectangle
           parameters:
           - {name: rawAuton, type: String, value: '5ft,-90dg,2ft,180dg,5ft,90dg,2ft,'}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: TryFour
+          parameters:
+          - {name: rawAuton, type: String, value: 'RR,2ft,-5ft,|RL,5ft,-2ft,|LR,4ft,-2ft,|LL,3ft,-4ft,'}
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
