@@ -83,7 +83,6 @@ public class DriveTrain extends Subsystem {
 	public final double TURN_INNER_SPEED_DEFAULT = -0.5;
 
     public boolean isReversed = false;
-    public boolean straightLockedGyro = false;
 	
     @Override
     public void initDefaultCommand() {
@@ -233,6 +232,10 @@ public class DriveTrain extends Subsystem {
 		rightFrontMotor.set(rightFrontMotor.getControlMode(), MAX_TICKS_PER_SECOND * .25 * setSpeed);
 	}
 
+	public AHRS getAHRS() {
+		return ahrs;
+	}
+	
 	public ControlMode getControlMode() {
 		return currentControlMode;
 	}
