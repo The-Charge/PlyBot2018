@@ -187,6 +187,9 @@ public class DriveTrain extends Subsystem {
     	leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
     	rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
     	
+    	leftFrontMotor.setSelectedSensorPosition(0, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
+    	rightFrontMotor.setSelectedSensorPosition(0, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
+    	
     	leftFrontMotor.selectProfileSlot(MotionMagicPIDSlot, MotionMagicPIDIndex);
     	rightFrontMotor.selectProfileSlot(MotionMagicPIDSlot, MotionMagicPIDIndex);
     	
@@ -206,8 +209,6 @@ public class DriveTrain extends Subsystem {
     	rightFrontMotor.configMotionAcceleration(MotionMagicAcceleration, RobotMap.TIMEOUT_MS);
     	rightFrontMotor.configMotionCruiseVelocity(MotionMagicVelocity, RobotMap.TIMEOUT_MS);
     	
-    	leftFrontMotor.setSelectedSensorPosition(0, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
-    	rightFrontMotor.setSelectedSensorPosition(0, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
     	
     	MotionMagicDistance *= TICKS_PER_FOOT;
     	leftFrontMotor.set(ControlMode.MotionMagic, MotionMagicDistance);

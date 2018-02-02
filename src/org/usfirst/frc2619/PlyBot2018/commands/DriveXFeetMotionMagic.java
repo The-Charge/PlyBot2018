@@ -58,8 +58,7 @@ public class DriveXFeetMotionMagic extends Command {
     @Override
     protected void end() {
     	Robot.driveTrain.setPercentVBus();
-    	//Robot.driveTrain.stop();
-    	Robot.driveTrain.run(0, 0);
+    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
