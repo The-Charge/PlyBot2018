@@ -1084,14 +1084,14 @@ Children:
       Continuous: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Continuous, validators: null, value: false}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id014
+        default: []
+        name: Parameter presets
+        validators: null
+        value:
         - !!robotbuilder.data.properties.ParameterSet
           name: Drive5Feet
           parameters:
           - {name: distance, type: double, value: '5'}
-        name: Parameter presets
-        validators: null
-        value: *id014
       Tolerance: !!robotbuilder.data.properties.DoubleProperty {default: 0.2, name: Tolerance,
         validators: null, value: 0.2}
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,

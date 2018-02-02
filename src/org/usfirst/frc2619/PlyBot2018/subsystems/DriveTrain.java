@@ -196,6 +196,10 @@ public class DriveTrain extends Subsystem {
 	public ControlMode getControlMode() {
 		return currentControlMode;
 	}
+	
+	public void setEncoderPosition(int value) {
+		leftFrontMotor.getSensorCollection().setQuadraturePosition(value, 10);
+	}
     
     public void MotionMagicInit(double distance) {
     	MotionMagicDistance = distance;
