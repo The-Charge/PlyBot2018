@@ -64,12 +64,12 @@ public class DriveTrain extends Subsystem {
 	public double speedD = SPEED_D_CONSTANT;
 	public double speedF = SPEED_F_CONSTANT;
     
-    public final double TICKS_PER_FOOT = 3655;
+    public final double TICKS_PER_FOOT = 4420;
     
-    public double MotionMagicP = 0;
-    public double MotionMagicI = 0;
+    public double MotionMagicP = 2;
+    public double MotionMagicI = 0.001;
     public double MotionMagicD = 0;
-    public double MotionMagicF = 0;
+    public double MotionMagicF = 0.72;
     public int MotionMagicAcceleration = 4000;
     public int MotionMagicVelocity = 6000;
     public int MotionMagicPIDIndex = 0;
@@ -140,7 +140,7 @@ public class DriveTrain extends Subsystem {
 
     public void setSpeedPID(double setSpeed) {
 		leftFrontMotor.set(ControlMode.Velocity, MAX_TICKS_PER_SECOND * setSpeed);
-		rightFrontMotor.set(ControlMode.Velocity, -MAX_TICKS_PER_SECOND * setSpeed);
+		rightFrontMotor.set(ControlMode.Velocity, MAX_TICKS_PER_SECOND * setSpeed);
 		SmartDashboard.putNumber("Current", Robot.driveTrain.getCurrent());
 	}
     
@@ -230,7 +230,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public boolean isAtPIDDestination() {
-		return (Math.abs(this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) - MotionMagicDistance) < 1000);// || this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) < -MotionMagicDistance + 6000)
+		return (Math.abs(this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) - MotionMagicDistance) < 500);// || this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) < -MotionMagicDistance + 6000)
 				//&& (Math.abs(this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) - this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex)) < MotionMagicDistance-6000);
 	}
     
@@ -240,10 +240,10 @@ public class DriveTrain extends Subsystem {
     }
     
     public void writeDashboardValues() {
-    	SmartDashboard.putNumber("PreZero", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
-    	SmartDashboard.putNumber("Distance", MotionMagicDistance);
-    	SmartDashboard.putNumber("PostZero", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
-    	SmartDashboard.putNumber("PostRun", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
+    	SmartDashboard.putNumber("Encoder", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
+    	//SmartDashboard.putNumber("Distance", MotionMagicDistance);
+    	//SmartDashboard.putNumber("PostZero", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
+    	//SmartDashboard.putNumber("PostRun", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
     	SmartDashboard.putString("Control Mode", leftFrontMotor.getControlMode().toString());
     	SmartDashboard.putBoolean("isFinished", isAtPIDDestination());
     	
@@ -252,6 +252,9 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("MotionMagicD", MotionMagicD);
     	SmartDashboard.putNumber("MotionMagicF", MotionMagicF);
     	SmartDashboard.putNumber("MotionMagicDistance", MotionMagicDistance);
+    	
+    	SmartDashboard.putNumber("Angle", getAHRSAngle());
+    	
     	
     }
     

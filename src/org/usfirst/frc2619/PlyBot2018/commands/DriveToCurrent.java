@@ -42,7 +42,7 @@ public class DriveToCurrent extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	this.setTimeout(0.5);
+    	this.setTimeout(1);
 		Robot.driveTrain.initSpeedMode();
     }
 

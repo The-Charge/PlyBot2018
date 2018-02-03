@@ -58,8 +58,9 @@ public class TextAutonCommand extends CommandGroup {
     			computedAuton = a.substring(3);
     		}
     	}
-    	
+    	addSequential(new ShiftLow());
     	System.out.println("ComputedAuton\n" + computedAuton);
+    	
     	
     	while(computedAuton.length() > 0) {
     		System.out.println(computedAuton);
@@ -80,7 +81,7 @@ public class TextAutonCommand extends CommandGroup {
 	    	
 	    	if(locDG > locFT && locFTDC > locFT) {
 	    		//these do not happen
-	    		addSequential(new DriveXFeetMotionMagic(Integer.parseInt(computedAuton.substring(0, locFT))));
+	    		addSequential(new DriveXFeetMotionMagic(Double.parseDouble(computedAuton.substring(0, locFT))));
 	    		System.out.println("DrivingXFeet");
 	    		if(computedAuton.length() > 3)
 	    			computedAuton = computedAuton.substring(locFT+3);
@@ -88,7 +89,7 @@ public class TextAutonCommand extends CommandGroup {
 	    			computedAuton = "";
 	    	}
 	    	else if (locFT > locDG && locFTDC > locDG) {
-	    		addSequential(new TurnNDegreesAbsolutePID(Integer.parseInt(computedAuton.substring(0, locDG))));
+	    		addSequential(new TurnNDegreesAbsolutePID(Double.parseDouble(computedAuton.substring(0, locDG))));
 	    		System.out.println("TurningNDegrees");
 	    		if(computedAuton.length() > 3)
 	    			computedAuton = computedAuton.substring(locDG+3);
