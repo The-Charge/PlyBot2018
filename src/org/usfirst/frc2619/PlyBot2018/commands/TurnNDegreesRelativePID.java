@@ -105,6 +105,7 @@ public class TurnNDegreesRelativePID extends PIDCommand {
     @Override
     protected void end() {
     	Robot.driveTrain.stop();
+    	getPIDController().reset();
 		RobotMap.driveTrainAHRS.setAngleAdjustment(0);
 		Robot.driveTrain.setControlMode(previousControlMode);
     }
