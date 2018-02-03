@@ -246,6 +246,18 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("PostRun", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
     	SmartDashboard.putString("Control Mode", leftFrontMotor.getControlMode().toString());
     	SmartDashboard.putBoolean("isFinished", isAtPIDDestination());
+    	
+    	SmartDashboard.putNumber("MotionMagicP", MotionMagicP);
+    	SmartDashboard.putNumber("MotionMagicI", MotionMagicI);
+    	SmartDashboard.putNumber("MotionMagicD", MotionMagicD);
+    	SmartDashboard.putNumber("MotionMagicF", MotionMagicF);
+    }
+    
+    public void readDashboardValues() {
+    	SmartDashboard.getNumber("MotionMagicP", MotionMagicP);
+    	SmartDashboard.getNumber("MotionMagicI", MotionMagicI);
+    	SmartDashboard.getNumber("MotionMagicD", MotionMagicD);
+    	SmartDashboard.getNumber("MotionMagicF", MotionMagicF);
     }
 
 	public void initSpeedMode() {
