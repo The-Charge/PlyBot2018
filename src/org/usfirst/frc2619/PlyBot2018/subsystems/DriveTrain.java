@@ -184,6 +184,7 @@ public class DriveTrain extends Subsystem {
     
     public void MotionMagicInit(double distance) {
     	MotionMagicDistance = distance;
+    	leftFrontMotor.setIntegralAccumulator(0, 0, 0);
     	leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
     	rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, MotionMagicPIDIndex, RobotMap.TIMEOUT_MS);
     	
