@@ -85,6 +85,8 @@ public class OI {
         SmartDashboard.putData("DroneDrive", new DroneDrive());
         SmartDashboard.putData("TurnNDegreesRelative: 90", new TurnNDegreesRelative(90));
         SmartDashboard.putData("DriveXFeetMotionMagic: MotionMagic5Feet", new DriveXFeetMotionMagic(5));
+        SmartDashboard.putData("DriveXFeetMotionMagic: Feet10", new DriveXFeetMotionMagic(10));
+        SmartDashboard.putData("DriveXFeetMotionMagic: Feet20", new DriveXFeetMotionMagic(20));
         SmartDashboard.putData("TurnNDegreesAbs: 90", new TurnNDegreesAbs(90));
         SmartDashboard.putData("ShiftHigh", new ShiftHigh());
         SmartDashboard.putData("ShiftLow", new ShiftLow());

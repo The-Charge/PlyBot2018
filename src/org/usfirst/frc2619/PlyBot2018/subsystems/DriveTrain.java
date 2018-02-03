@@ -66,10 +66,10 @@ public class DriveTrain extends Subsystem {
     
     public final double TICKS_PER_FOOT = 3655;
     
-    public double MotionMagicP = 0.3;
-    public double MotionMagicI = 0.001;
+    public double MotionMagicP = 0;
+    public double MotionMagicI = 0;
     public double MotionMagicD = 0;
-    public double MotionMagicF = 0.12;
+    public double MotionMagicF = 0;
     public int MotionMagicAcceleration = 4000;
     public int MotionMagicVelocity = 6000;
     public int MotionMagicPIDIndex = 0;
@@ -230,8 +230,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public boolean isAtPIDDestination() {
-		return (this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) > MotionMagicDistance - 6000 || this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) < -MotionMagicDistance + 6000)
-				&& (Math.abs(this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) - this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex)) < MotionMagicDistance-6000);
+		return (Math.abs(this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) - MotionMagicDistance) < 1000);// || this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) < -MotionMagicDistance + 6000)
+				//&& (Math.abs(this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex) - this.leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex)) < MotionMagicDistance-6000);
 	}
     
     public void setPercentVBus() {
@@ -251,6 +251,8 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("MotionMagicI", MotionMagicI);
     	SmartDashboard.putNumber("MotionMagicD", MotionMagicD);
     	SmartDashboard.putNumber("MotionMagicF", MotionMagicF);
+    	SmartDashboard.putNumber("MotionMagicDistance", MotionMagicDistance);
+    	
     }
     
     public void readDashboardValues() {
@@ -258,6 +260,7 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.getNumber("MotionMagicI", MotionMagicI);
     	SmartDashboard.getNumber("MotionMagicD", MotionMagicD);
     	SmartDashboard.getNumber("MotionMagicF", MotionMagicF);
+    	SmartDashboard.getNumber("MotionMagicDistance", MotionMagicDistance);
     }
 
 	public void initSpeedMode() {
