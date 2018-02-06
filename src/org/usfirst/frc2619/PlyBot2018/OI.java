@@ -102,9 +102,7 @@ public class OI {
         SmartDashboard.putData("OpenClaw", new OpenClaw());
         SmartDashboard.putData("CloseClaw", new CloseClaw());
         SmartDashboard.putData("DriveToCurrent: 0.1", new DriveToCurrent(0.1));
-        SmartDashboard.putData("TextAutonCommand: Rectangle", new TextAutonCommand("5ft,-90dg,2ft,180dg,5ft,90dg,2ft,"));
-        SmartDashboard.putData("TextAutonCommand: TryFour", new TextAutonCommand("RR,2ft,-5ft,|RL,5ft,-2ft,|LR,4ft,-2ft,|LL,3ft,-4ft,"));
-        SmartDashboard.putData("TextAutonCommand: LLSwitch", new TextAutonCommand("LL,20ft,-90dg,19.2ft,180dg,2.7ftdc,|LR,17.08ft,-90dg,19.2ft,180dg,3.33ft,2.7ftdc,"));
+        SmartDashboard.putData("TextAutonCommand", new TextAutonCommand());
         SmartDashboard.putData("ReadNewAutonText", new ReadNewAutonText());
         SmartDashboard.putData("ReadDashboardValues", new ReadDashboardValues());
         SmartDashboard.putData("LLSwitch", new LLSwitch());

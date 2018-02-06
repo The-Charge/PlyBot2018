@@ -946,19 +946,7 @@ Children:
         default: []
         name: Parameter presets
         validators: null
-        value:
-        - !!robotbuilder.data.properties.ParameterSet
-          name: Rectangle
-          parameters:
-          - {name: rawAuton, type: String, value: '5ft,-90dg,2ft,180dg,5ft,90dg,2ft,'}
-        - !!robotbuilder.data.properties.ParameterSet
-          name: TryFour
-          parameters:
-          - {name: rawAuton, type: String, value: 'RR,2ft,-5ft,|RL,5ft,-2ft,|LR,4ft,-2ft,|LL,3ft,-4ft,'}
-        - !!robotbuilder.data.properties.ParameterSet
-          name: LLSwitch
-          parameters:
-          - {name: rawAuton, type: String, value: 'LL,20ft,-90dg,19.2ft,180dg,2.7ftdc,|LR,17.08ft,-90dg,19.2ft,180dg,3.33ft,2.7ftdc,'}
+        value: []
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
@@ -1027,15 +1015,15 @@ Children:
       Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Run When Disabled, validators: null, value: false}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id015 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id015
+        value: []
       Commands: !!robotbuilder.data.properties.ListProperty
-        default: &id016 []
+        default: []
         name: Commands
         validators: *id014
-        value: *id016
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
