@@ -102,7 +102,7 @@ public class OI {
         SmartDashboard.putData("OpenClaw", new OpenClaw());
         SmartDashboard.putData("CloseClaw", new CloseClaw());
         SmartDashboard.putData("DriveToCurrent: 0.1", new DriveToCurrent(0.1));
-        SmartDashboard.putData("TextAutonCommand", new TextAutonCommand());
+        SmartDashboard.putData("TextAutonCommand", new TextAutonCommand(null));
         SmartDashboard.putData("ReadNewAutonText", new ReadNewAutonText());
         SmartDashboard.putData("ReadDashboardValues", new ReadDashboardValues());
         SmartDashboard.putData("LLSwitch", new LLSwitch());
