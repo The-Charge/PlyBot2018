@@ -12,6 +12,7 @@
 package org.usfirst.frc2619.PlyBot2018;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -120,7 +121,62 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        autonomousCommand = chooser.getSelected();
+        autonomousCommand = new StationThreeRightSwitchAuton();
+        String leftRight = DriverStation.getInstance().getGameSpecificMessage();
+        if(text == false) {
+        	if(switchOrScale == true) {
+        		if (station == 1) {
+        			if (leftRight.charAt(0) == 'L') {
+        				autonomousCommand = new StationOneLeftSwitchAuton();
+        			}
+        			else if (leftRight.charAt(0) == 'R') {
+        				autonomousCommand = new StationOneRightSwitchAuton();
+        			}
+        		}
+        		else if (station == 2) {
+        			if (leftRight.charAt(0) == 'L') {
+        				autonomousCommand = new StationTwoLeftSwitchAuton();
+        			}
+        			else if (leftRight.charAt(0) == 'R') {
+        				autonomousCommand = new StationTwoRightSwitchAuton();
+        			}
+        		}
+        		else if (station == 3) {
+        			if (leftRight.charAt(0) == 'L') {
+        				autonomousCommand = new StationThreeLeftSwitchAuton();
+        			}
+        			else if (leftRight.charAt(0) == 'R') {
+        				autonomousCommand = new StationThreeRightSwitchAuton();
+        			}
+        		}
+        	}
+        	else if(switchOrScale == false) {
+        		if (station == 1) {
+        			if (leftRight.charAt(0) == 'L') {
+        				autonomousCommand = new StationOneLeftScaleAuton();
+        			}
+        			else if (leftRight.charAt(0) == 'R') {
+        				autonomousCommand = new StationOneRightScaleAuton();
+        			}
+        		}
+        		else if (station == 2) {
+        			if (leftRight.charAt(0) == 'L') {
+        				autonomousCommand = new StationTwoLeftScaleAuton();
+        			}
+        			else if (leftRight.charAt(0) == 'R') {
+        				autonomousCommand = new StationTwoRightScaleAuton();
+        			}
+        		}
+        		else if (station == 3) {
+        			if (leftRight.charAt(0) == 'L') {
+        				autonomousCommand = new StationThreeLeftScaleAuton();
+        			}
+        			else if (leftRight.charAt(0) == 'R') {
+        				autonomousCommand = new StationThreeRightScaleAuton();
+        			}
+        		}
+        	}
+        }
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
