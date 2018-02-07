@@ -73,6 +73,7 @@ public class SpeedControl extends Command {
     	//Robot.driveTrain.setControlMode(previousControlMode);
     	Robot.driveTrain.stop();
     	Robot.shifters.shiftHigh();
+    	
     }
 
     // Called when another command which requires one or more of the same
