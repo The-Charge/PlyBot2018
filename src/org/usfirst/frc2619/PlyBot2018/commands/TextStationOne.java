@@ -37,8 +37,8 @@ public class TextStationOne extends InstantCommand {
     // Called once when this command runs
     @Override
     protected void initialize() {
-    	Robot.setStation(1);
-    	Robot.setText(true);
+    	/*Robot.setStation(1);
+    	Robot.setText(true);*/
     }
 
 }
