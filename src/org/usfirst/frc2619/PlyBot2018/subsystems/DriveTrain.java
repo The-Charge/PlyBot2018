@@ -234,7 +234,10 @@ public class DriveTrain extends Subsystem {
     	rightFrontMotor.set(ControlMode.PercentOutput, 0);
     }
     
-    public void writeDashboardValues() {
+    /**
+     * These are debug values, stuff that should be written as much as possible
+     */
+    public void writeDebugDashboardValues() {
     	SmartDashboard.putNumber("PreZero", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
     	SmartDashboard.putNumber("Distance", MotionMagicDistance);
     	SmartDashboard.putNumber("PostZero", leftFrontMotor.getSelectedSensorPosition(MotionMagicPIDIndex));
@@ -245,10 +248,17 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("Encoder", pot.get());
     	SmartDashboard.putNumber("Encoder Position Left", leftFrontMotor.getSelectedSensorPosition(0));
     	SmartDashboard.putNumber("Encoder Position Right", rightFrontMotor.getSelectedSensorPosition(0));
+
+		SmartDashboard.putNumber("Current Time", System.currentTimeMillis());
+    }
+    
+    /**
+     * These are defaults for controls, they should be written only ONCE on ROBOT INIT
+     */
+    public void writeDefaultDashboardValues() {
     	SmartDashboard.putNumber("Deadband", .1);
 		SmartDashboard.putNumber("Root", 1);
 		SmartDashboard.putNumber("Power", 3);
-		SmartDashboard.putNumber("Current Time", System.currentTimeMillis());
     }
 
 	public void initSpeedMode() {
