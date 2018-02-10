@@ -69,9 +69,6 @@ public class TurnNDegreesRelative  extends Command {
     protected void execute() {
     	current = Robot.driveTrain.getYaw();
     	direction = MathUtil.calcDirection(current, finalyaw);
-    	SmartDashboard.putNumber("Current Yaw", current);
-    	SmartDashboard.putNumber("Final Yaw" , finalyaw);
-    	SmartDashboard.putNumber("Direction" , direction);
     	
     	run();
     }
