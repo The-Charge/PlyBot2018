@@ -92,4 +92,10 @@ public class Elevator extends PIDSubsystem {
     public void setSetPointFeet(double setPoint) {
     	setSetpoint(setPoint*Robot.elevator.TICKS_PER_FOOT);
     }
+    public boolean isForward() {
+    	if (motor.get()>=0)
+    		return true;
+    	else
+    		return false;
+    }
 }
