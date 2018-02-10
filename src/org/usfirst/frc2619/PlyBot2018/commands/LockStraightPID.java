@@ -79,11 +79,11 @@ public class LockStraightPID extends PIDCommand {
     	leftSpeed = averageSpeed;
     	rightSpeed = averageSpeed;
     	
-    	if (setpointAngle > 0) {	//if it needs to turn right; slow down right motor
+    	if (output > 0) {	//if it needs to turn right; slow down right motor
             RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed);
             RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed - output);
     	}
-    	else if (setpointAngle < 0) {	//if it needs to turn left; slow down left motor
+    	else if (output < 0) {	//if it needs to turn left; slow down left motor
             RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed + output);
             RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed);
     	}
