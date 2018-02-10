@@ -39,7 +39,7 @@ public class OverrideElevator extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	Robot.elevator.disable();
+    	//Robot.elevator.disable();
     	if (m_isForward) {
     		Robot.elevator.setPow(0.5);
     	}else {
