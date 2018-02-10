@@ -96,6 +96,7 @@ public class TurnNDegreesAbsolutePID extends PIDCommand {
     protected void end() {
     	Robot.driveTrain.stop();
     	getPIDController().reset();
+    	getPIDController().disable();
     	Robot.driveTrain.setControlMode(previousControlMode);
     }
 

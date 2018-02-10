@@ -59,8 +59,8 @@ public class ElevateToXFeet extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    	Robot.elevator.disable();
     	Robot.elevator.getPIDController().reset();
+    	Robot.elevator.disable();
     }
 
     // Called when another command which requires one or more of the same
