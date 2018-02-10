@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc2619.PlyBot2018.MathUtil;
 import org.usfirst.frc2619.PlyBot2018.Robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 /**
  *
  */
@@ -41,6 +43,7 @@ public class TankDrive extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+    	Robot.driveTrain.setControlMode(ControlMode.PercentOutput);
     }
 
     // Called repeatedly when this Command is scheduled to run
