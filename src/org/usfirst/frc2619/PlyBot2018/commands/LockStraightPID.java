@@ -60,7 +60,6 @@ public class LockStraightPID extends PIDCommand {
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
 
         return RobotMap.driveTrainAHRS.pidGet();
-
     }
 
     @Override
@@ -79,13 +78,29 @@ public class LockStraightPID extends PIDCommand {
     	leftSpeed = averageSpeed;
     	rightSpeed = averageSpeed;
     	
-    	if (output > 0) {	//if it needs to turn right; slow down right motor
-            RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed);
-            RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed - output);
+    	if (output > 0) {	//if it needs to turn right
+    		if (RobotMap.driveTrainLeftFrontMotor.getSelectedSensorVelocity(0) > 0) {	//moving forwards
+    			RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed);
+    			RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed - output);
+    			//slow down the right motor
+    		}
+    		else {	//moving backwards
+    			RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed + output);
+    			RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed);
+    			//slow down (increase output of) left motor
+    		}
     	}
-    	else if (output < 0) {	//if it needs to turn left; slow down left motor
-            RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed + output);
-            RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed);
+    	else if (output < 0) {	//if it needs to turn left
+    		if (RobotMap.driveTrainLeftFrontMotor.getSelectedSensorVelocity(0) > 0) {	//moving forwards
+                RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed + output);
+                RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed);
+                //slow down left motor (adding a negative)
+    		}
+    		else {	//moving backwards
+                RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed);
+                RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed - output);
+                //slow down (inrease output of) right motor
+    		}
     	}
     	else {	//otherwise just use joystick input
             RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed);
@@ -101,7 +116,6 @@ public class LockStraightPID extends PIDCommand {
     	getPIDController().setSetpoint(setpointAngle);
     	previousControlMode = Robot.driveTrain.getControlMode();
     	Robot.driveTrain.setControlMode(ControlMode.PercentOutput);
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run

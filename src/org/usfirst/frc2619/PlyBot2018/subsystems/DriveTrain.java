@@ -85,7 +85,7 @@ public class DriveTrain extends Subsystem {
     public boolean isReversed = false;
     
     public boolean driveLocked = false;
-	
+	//not needed - only used with non-PID LockStraight
     
     @Override
     public void initDefaultCommand() {
