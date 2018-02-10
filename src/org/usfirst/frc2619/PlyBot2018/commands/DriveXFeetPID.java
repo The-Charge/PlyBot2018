@@ -94,7 +94,7 @@ public class DriveXFeetPID extends PIDCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return getPIDController().getError() < 100;//Robot.driveTrain.isAtDestination();
+        return getPIDController().getError() < 1000;
     }
 
     // Called once after isFinished returns true

@@ -198,7 +198,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void setEncoderPosition(int value) {
-		leftFrontMotor.getSensorCollection().setQuadraturePosition(value, 10);
+		leftFrontMotor.getSensorCollection().setQuadraturePosition(value, RobotMap.TIMEOUT_MS);
 	}
     
     public void MotionMagicInit(double distance) {
