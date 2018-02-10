@@ -101,6 +101,7 @@ public class LockStraightPID extends PIDCommand {
     	getPIDController().setSetpoint(setpointAngle);
     	previousControlMode = Robot.driveTrain.getControlMode();
     	Robot.driveTrain.setControlMode(ControlMode.PercentOutput);
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
