@@ -143,7 +143,7 @@ public class OI {
         SmartDashboard.putData("ScaleStationThree", new ScaleStationThree());
         SmartDashboard.putData("ScaleStationTwo", new ScaleStationTwo());
         SmartDashboard.putData("ScaleStationOne", new ScaleStationOne());
-        SmartDashboard.putData("TextAutonCommand", new TextAutonCommand(null));
+        SmartDashboard.putData("TextAutonCommand", new TextAutonCommand("RR,2ft,||RL,2ft,"));
         SmartDashboard.putData("ReadNewAutonText", new ReadNewAutonText());
         SmartDashboard.putData("ReadDashboardValues", new ReadDashboardValues());
 
