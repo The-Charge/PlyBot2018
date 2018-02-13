@@ -77,7 +77,7 @@ public class Elevator extends Subsystem {
     }
     public void powToTarget(int target) {
     	count();
-    	if (pos > target) {
+    	if (pos >= target) {
     		setPow(-0.5);
     	}else {
     		setPow(0.5);
@@ -95,12 +95,26 @@ public class Elevator extends Subsystem {
     }
     public void resetPosBottom() {
     	pos = 0;
-    	lastValue = counter.get();
+    	counter.reset();
+    	lastValue = 0;
     }
     
     public void resetPosTop() {
     	pos = 4;
-    	lastValue = counter.get();
+    	counter.reset();
+    	lastValue = 0;
+    }
+    public void reset() {
+    	counter.reset();
+    	pos = 0;
+    	lastValue = 0;
+    }
+    public void checkLimitSwitches() {
+    	if (false) {
+    		resetPosTop();
+    	}else if (false)  {
+    		resetPosBottom();
+    	}
     }
 }
 
