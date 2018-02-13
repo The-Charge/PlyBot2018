@@ -63,6 +63,7 @@ public class Elevator extends Subsystem {
     	return (motor.get()>0);
     }
     public void setPow(double pow) {
+    	count();
     	motor.set(pow);
     }
     public void count() {
@@ -75,6 +76,7 @@ public class Elevator extends Subsystem {
     	lastValue = counter.get();
     }
     public void powToTarget(int target) {
+    	count();
     	if (pos > target) {
     		setPow(-0.5);
     	}else {
@@ -82,6 +84,7 @@ public class Elevator extends Subsystem {
     	}
     }
     public boolean isPastTarget(int target) {
+    	count();
     	if ((motor.get()==0)) {
     		return false;
     	}else if (isForward()) {
@@ -92,10 +95,12 @@ public class Elevator extends Subsystem {
     }
     public void resetPosBottom() {
     	pos = 0;
+    	lastValue = counter.get();
     }
     
     public void resetPosTop() {
     	pos = 4;
+    	lastValue = counter.get();
     }
 }
 
