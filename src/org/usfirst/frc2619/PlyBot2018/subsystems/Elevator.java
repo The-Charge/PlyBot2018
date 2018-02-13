@@ -71,6 +71,7 @@ public class Elevator extends Subsystem {
     		diff = -diff;
     	pos += diff;
     	SmartDashboard.putNumber("ElevatorPosition:", pos);
+    	SmartDashboard.putNumber("DefaultCounter:", counter.get());
     	lastValue = counter.get();
     }
     public void powToTarget(int target) {
@@ -86,7 +87,7 @@ public class Elevator extends Subsystem {
     	}else if (isForward()) {
     		return (pos>=target);
     	}else {
-    		return (pos<=target);
+    		return (pos<=target-1);
     	}
     }
     public void resetPosBottom() {
