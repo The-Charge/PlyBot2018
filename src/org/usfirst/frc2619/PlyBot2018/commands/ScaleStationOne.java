@@ -49,7 +49,7 @@ public class ScaleStationOne extends CommandGroup {
 			addSequential(new StationOneLeftScaleAuton());
 		}
 		else if (leftRight.charAt(1) == 'R') {
-			addSequential(new StationOneRightScaleAuton());
+			addSequential(new SwitchStationOne());
 		}
  
     } 
