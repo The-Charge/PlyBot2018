@@ -75,38 +75,27 @@ public class LockStraightPID extends PIDCommand {
     	
     	double averageSpeed;
     	averageSpeed = (leftSpeed+rightSpeed)/2;
-    	leftSpeed = averageSpeed;
-    	rightSpeed = averageSpeed;
     	
-    	if (output > 0) {	//if it needs to turn right
-    		if (RobotMap.driveTrainLeftFrontMotor.getSelectedSensorVelocity(0) > 0) {	//moving forwards
-    			RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed);
-    			RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed - output);
-    			//slow down the right motor
+    	if (averageSpeed < 0) {	//moving backwards
+    		if (output > 0) {	//needs to turn clockwise
+    			RobotMap.driveTrainLeftFrontMotor.pidWrite(averageSpeed + output);
+    			RobotMap.driveTrainRightFrontMotor.pidWrite(averageSpeed);
     		}
-    		else {	//moving backwards
-    			RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed + output);
-    			RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed);
-    			//slow down (increase output of) left motor
+    		else {	//counterclockwise
+    			RobotMap.driveTrainLeftFrontMotor.pidWrite(averageSpeed);
+    			RobotMap.driveTrainRightFrontMotor.pidWrite(averageSpeed - output);
     		}
     	}
-    	else if (output < 0) {	//if it needs to turn left
-    		if (RobotMap.driveTrainLeftFrontMotor.getSelectedSensorVelocity(0) > 0) {	//moving forwards
-                RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed + output);
-                RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed);
-                //slow down left motor (adding a negative)
+    	else {	//forwards or no input
+    		if (output > 0) {
+    			RobotMap.driveTrainLeftFrontMotor.pidWrite(averageSpeed);
+    			RobotMap.driveTrainRightFrontMotor.pidWrite(averageSpeed - output);
     		}
-    		else {	//moving backwards
-                RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed);
-                RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed - output);
-                //slow down (inrease output of) right motor
+    		else {
+    			RobotMap.driveTrainLeftFrontMotor.pidWrite(averageSpeed + output);
+    			RobotMap.driveTrainRightFrontMotor.pidWrite(averageSpeed);
     		}
     	}
-    	else {	//otherwise just use joystick input
-            RobotMap.driveTrainLeftFrontMotor.pidWrite(leftSpeed);
-            RobotMap.driveTrainRightFrontMotor.pidWrite(rightSpeed);
-    	}
-
     }
 
     // Called just before this Command runs the first time
@@ -132,8 +121,8 @@ public class LockStraightPID extends PIDCommand {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    	Robot.driveTrain.stop();
     	Robot.driveTrain.setControlMode(previousControlMode);
+    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
