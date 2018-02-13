@@ -60,7 +60,7 @@ public class Elevator extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public boolean isForward() {
-    	return (motor.get()>=0);
+    	return (motor.get()>0);
     }
     public void setPow(double pow) {
     	motor.set(pow);
@@ -72,6 +72,29 @@ public class Elevator extends Subsystem {
     	pos += diff;
     	SmartDashboard.putNumber("ElevatorPosition:", pos);
     	lastValue = counter.get();
+    }
+    public void powToTarget(int target) {
+    	if (pos > target) {
+    		setPow(-0.5);
+    	}else {
+    		setPow(0.5);
+    	}
+    }
+    public boolean isPastTarget(int target) {
+    	if ((motor.get()==0)) {
+    		return false;
+    	}else if (isForward()) {
+    		return (pos>=target);
+    	}else {
+    		return (pos<=target);
+    	}
+    }
+    public void resetPosBottom() {
+    	pos = 0;
+    }
+    
+    public void resetPosTop() {
+    	pos = 4;
     }
 }
 

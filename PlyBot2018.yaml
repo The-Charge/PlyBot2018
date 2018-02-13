@@ -1262,36 +1262,36 @@ Children:
         name: Parameters
         validators: null
         value:
-        - !!robotbuilder.data.properties.ParameterDescriptor {name: feet, type: double}
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: target, type: int}
       Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Run When Disabled, validators: null, value: false}
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Requires, type: Subsystem, validators: null, value: None}
+        name: Requires, type: Subsystem, validators: null, value: Elevator}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: []
+        default: &id014
+        - !!robotbuilder.data.properties.ParameterSet
+          name: Elevate to 1
+          parameters:
+          - {name: target, type: int, value: '1'}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: Elevate to 2
+          parameters:
+          - {name: target, type: int, value: '2'}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: Elevate to 3
+          parameters:
+          - {name: target, type: int, value: '3'}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: Elevate to 4
+          parameters:
+          - {name: target, type: int, value: '4'}
         name: Parameter presets
         validators: null
-        value:
-        - !!robotbuilder.data.properties.ParameterSet
-          name: 1foot
-          parameters:
-          - {name: feet, type: double, value: '1'}
-        - !!robotbuilder.data.properties.ParameterSet
-          name: 2feet
-          parameters:
-          - {name: feet, type: double, value: '2'}
-        - !!robotbuilder.data.properties.ParameterSet
-          name: 5feet
-          parameters:
-          - {name: feet, type: double, value: '5'}
-        - !!robotbuilder.data.properties.ParameterSet
-          name: 0feet
-          parameters:
-          - {name: feet, type: double, value: '0'}
+        value: *id014
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
-    Name: ElevateToXFeet
+    Name: ElevateToXPos
   Properties: {}
   Base: Commands
   Name: Commands
