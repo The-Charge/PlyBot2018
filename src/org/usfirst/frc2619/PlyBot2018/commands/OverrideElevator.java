@@ -41,9 +41,9 @@ public class OverrideElevator extends Command {
     protected void initialize() {
     	//Robot.elevator.disable();
     	if (m_isForward) {
-    		Robot.elevator.setPow(0.5);
+    		Robot.elevator.runMotorRev();
     	}else {
-    		Robot.elevator.setPow(-0.5);
+    		Robot.elevator.runMotorFwd();
     	}
     }
 
@@ -62,7 +62,7 @@ public class OverrideElevator extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    	Robot.elevator.setPow(0);
+    	Robot.elevator.stop();
     }
 
     // Called when another command which requires one or more of the same
