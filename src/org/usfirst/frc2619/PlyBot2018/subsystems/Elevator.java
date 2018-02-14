@@ -111,9 +111,9 @@ public class Elevator extends Subsystem {
     	lastValue = 0;
     }
     public void checkLimitSwitches() {
-    	if (false) {
+    	if (motor.getSensorCollection().isFwdLimitSwitchClosed()) {
     		resetPosTop();
-    	}else if (false)  {
+    	}else if (motor.getSensorCollection().isRevLimitSwitchClosed())  {
     		resetPosBottom();
     	}
     }
