@@ -72,6 +72,7 @@ public class Elevator extends Subsystem {
     
     private void setPow(double pow) {
     	count();
+    	currentLimiting();
     	motor.set(pow);
     }
     
@@ -143,7 +144,7 @@ public class Elevator extends Subsystem {
     	}
     }
     
-    public void currentLimiting() {
+    private void currentLimiting() {
 		motor.configContinuousCurrentLimit((int) CURRENT_LIMIT, RobotMap.TIMEOUT_MS);
 		motor.enableCurrentLimit(true);
 		followerMotor.configContinuousCurrentLimit((int) CURRENT_LIMIT, RobotMap.TIMEOUT_MS);
