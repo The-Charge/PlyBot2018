@@ -62,6 +62,7 @@ public class DriveToCurrent extends Command {
     @Override
     protected void end() {
     	Robot.driveTrain.stop();
+    	Robot.driveTrain.setPercentVBus();
     }
 
     // Called when another command which requires one or more of the same

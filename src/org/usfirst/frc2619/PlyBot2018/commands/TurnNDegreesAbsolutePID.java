@@ -96,7 +96,7 @@ public class TurnNDegreesAbsolutePID extends PIDCommand {
     @Override
     protected void end() {
     	Robot.driveTrain.stop();
-    	Robot.driveTrain.setControlMode(previousControlMode);
+    	Robot.driveTrain.setPercentVBus();
     }
 
     // Called when another command which requires one or more of the same

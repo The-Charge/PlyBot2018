@@ -70,7 +70,7 @@ public class DriveTrain extends Subsystem {
     public double MotionMagicD = 0;
     public double MotionMagicF = 0.72;
     public int MotionMagicAcceleration = 4000;
-    public int MotionMagicVelocity = 6000;
+    public int MotionMagicVelocity = 11000;
     public int MotionMagicPIDIndex = 0;
     public int MotionMagicPIDSlot = 0;
     public double MotionMagicDistance;
@@ -146,7 +146,7 @@ public class DriveTrain extends Subsystem {
 
     public void run(double leftSpeed, double rightSpeed) {
     	setPercentVBus();
-    	if (driveLocked) {
+    	/*if (driveLocked) {
 			double avSpeed = (leftSpeed + rightSpeed) / 2.0;
 			leftSpeed = avSpeed;
 			rightSpeed = avSpeed;
@@ -159,19 +159,19 @@ public class DriveTrain extends Subsystem {
 				rightFrontMotor.set(-1 * rightSpeed);
 			}
 		} 
-    	else if (!isReversed) {
+    	else if (!isReversed) {*/
 			leftFrontMotor.set(leftSpeed);
 			rightFrontMotor.set(rightSpeed);
 
-		} 
+		/*} 
     	else {
 			leftFrontMotor.set(-1 * leftSpeed);
 			rightFrontMotor.set(-1 * rightSpeed);
-		}
+		}*/
     	
-    	SmartDashboard.putNumber("Encoder", pot.get());
+    	/*SmartDashboard.putNumber("Encoder", pot.get());
     	SmartDashboard.putNumber("Encoder Position Left", leftFrontMotor.getSelectedSensorPosition(0));
-    	SmartDashboard.putNumber("Encoder Position Right", rightFrontMotor.getSelectedSensorPosition(0));
+    	SmartDashboard.putNumber("Encoder Position Right", rightFrontMotor.getSelectedSensorPosition(0));*/
     }
     
     
@@ -238,17 +238,17 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("MotionMagicF", MotionMagicF);
     	SmartDashboard.putNumber("MotionMagicDistance", MotionMagicDistance);
     	
-    	SmartDashboard.putNumber("Angle", getAHRSAngle());
+    	SmartDashboard.putNumber("Angle", RobotMap.driveTrainAHRS.pidGet());
     	
     	
     }
     
     public void readDashboardValues() {
-    	SmartDashboard.getNumber("MotionMagicP", MotionMagicP);
+    	/*SmartDashboard.getNumber("MotionMagicP", MotionMagicP);
     	SmartDashboard.getNumber("MotionMagicI", MotionMagicI);
     	SmartDashboard.getNumber("MotionMagicD", MotionMagicD);
     	SmartDashboard.getNumber("MotionMagicF", MotionMagicF);
-    	SmartDashboard.getNumber("MotionMagicDistance", MotionMagicDistance);
+    	SmartDashboard.getNumber("MotionMagicDistance", MotionMagicDistance);*/
     }
 
     public void initSpeedMode() {    	
@@ -272,13 +272,13 @@ public class DriveTrain extends Subsystem {
     }
     
 	public void setSpeedPIDL(double setSpeed) {
-		setSpeed = MathUtil.deadband(-setSpeed, .1);
-		leftFrontMotor.set(leftFrontMotor.getControlMode(), MAX_TICKS_PER_SECOND * .25 * setSpeed);
+		/*setSpeed = MathUtil.deadband(-setSpeed, .1);
+		leftFrontMotor.set(leftFrontMotor.getControlMode(), MAX_TICKS_PER_SECOND * .25 * setSpeed);*/
 	}
 
 	public void setSpeedPIDR(double setSpeed) {
-		setSpeed = MathUtil.deadband(-setSpeed, .1);
-		rightFrontMotor.set(rightFrontMotor.getControlMode(), MAX_TICKS_PER_SECOND * .25 * setSpeed);
+		/*setSpeed = MathUtil.deadband(-setSpeed, .1);
+		rightFrontMotor.set(rightFrontMotor.getControlMode(), MAX_TICKS_PER_SECOND * .25 * setSpeed);*/
 	}
 
 	public ControlMode getControlMode() {

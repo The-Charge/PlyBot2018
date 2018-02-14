@@ -46,8 +46,8 @@ public class StationThreeLeftScaleAuton extends CommandGroup {
     	addSequential(new ShiftLow());
     	addSequential(new DriveXFeetMotionMagic(17.75));
      	addSequential(new TurnNDegreesAbsolutePID(-90));
-     	addSequential(new DriveXFeetMotionMagic(16));
+     	addSequential(new DriveXFeetMotionMagic(16.5));
      	addSequential(new TurnNDegreesAbsolutePID(0));
-     	addSequential(new DriveToCurrent(.03, 0.5));
+     	addSequential(new DriveToCurrent(.07, 1));
     } 
 }
