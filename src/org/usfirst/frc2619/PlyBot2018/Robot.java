@@ -73,12 +73,10 @@ public class Robot extends TimedRobot {
         // pointers. Bad news. Don't move it.
         oi = new OI();
         
-        // Add commands to Autonomous Sendable Chooser
-        
+        // Add commands to Autonomous Sendable Choosers
         chooser.addObject("StationOneSwitch", new SwitchStationOne());
         chooser.addObject("StationOneScale", new ScaleStationOne());
         chooser.addDefault("StationTwoSwitch", new SwitchStationTwo());
-        chooser.addObject("StationTwoScale", new ScaleStationTwo());
         chooser.addObject("StationThreeSwitch", new SwitchStationThree());
         chooser.addObject("StationThreeScale", new ScaleStationThree());
         chooser.addObject("Text", new ReadNewAutonText());
