@@ -43,8 +43,8 @@ public class Elevator extends Subsystem {
 
     //final variables for tuning the elevator.
     private static final int NUMBER_OF_POSITIONS = 4;
-    private static final double MOTOR_POW = 0.5;
-    private static final int CURRENT_LIMIT = 20;
+    private static final double MOTOR_POW = 0.6;
+    private static final double CURRENT_LIMIT = 6;
     
     @Override
     public void initDefaultCommand() {
@@ -151,5 +151,9 @@ public class Elevator extends Subsystem {
 		followerMotor.configContinuousCurrentLimit((int) CURRENT_LIMIT, RobotMap.TIMEOUT_MS);
 		followerMotor.enableCurrentLimit(true);
 	}
+    
+    public void writeDashboard() {
+    	SmartDashboard.putNumber("Elevator Current", Robot.elevator.motor.getOutputCurrent());
+    }
 }
 
