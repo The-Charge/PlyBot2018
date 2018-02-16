@@ -76,7 +76,7 @@ public class RunCollectorPID extends PIDCommand {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	RobotMap.collectorMotor.set(TalonSRX.class);
+    	RobotMap.collectorMotor.set(ControlMode.Velocity, RobotMap.TIMEOUT_MS);
     }
 
     // Called repeatedly when this Command is scheduled to run
