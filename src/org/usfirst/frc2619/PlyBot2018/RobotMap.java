@@ -81,7 +81,7 @@ public class RobotMap {
         elevatorMotor = new WPI_TalonSRX(5);
         
         
-        climberMotor = new WPI_TalonSRX(7);
+        climberMotor = new WPI_TalonSRX(8);
         
         
 
