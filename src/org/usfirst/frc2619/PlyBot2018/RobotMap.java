@@ -37,6 +37,7 @@ public class RobotMap {
     public static AnalogGyro driveTraindoNotUse;
     public static Solenoid shiftersSolenoid;
     public static WPI_TalonSRX collectorMotor;
+    public static Encoder collectorQuadratureEncoder;
     public static Solenoid clawSolenoid;
     public static Encoder elevatorQuadratureEncoder;
     public static WPI_TalonSRX elevatorMotor;
@@ -70,6 +71,10 @@ public class RobotMap {
         collectorMotor = new WPI_TalonSRX(6);
         
         
+        collectorQuadratureEncoder = new Encoder(2, 3, false, EncodingType.k4X);
+        LiveWindow.addSensor("Collector", "Quadrature Encoder", collectorQuadratureEncoder);
+        collectorQuadratureEncoder.setDistancePerPulse(1.0);
+        collectorQuadratureEncoder.setPIDSourceType(PIDSourceType.kRate);
         clawSolenoid = new Solenoid(0, 2);
         LiveWindow.addActuator("Claw", "Solenoid", clawSolenoid);
         
