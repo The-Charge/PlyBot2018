@@ -43,7 +43,6 @@ public class ElevateToXPos extends Command {
     @Override
     protected void initialize() {
     	Robot.elevator.powToTarget(m_target);
-    	Robot.elevator.currentLimiting();
     }
 
     // Called repeatedly when this Command is scheduled to run
