@@ -147,12 +147,15 @@ public class Elevator extends Subsystem {
     	SmartDashboard.putNumber("ElevatorPosition:", pos);
     }
     
-    public void checkLimitSwitches() {
+    public boolean checkLimitSwitches() {
     	if (motor.getSensorCollection().isFwdLimitSwitchClosed()) {
     		resetPosTop();
+    		return true;
     	}else if (motor.getSensorCollection().isRevLimitSwitchClosed())  {
     		resetPosBottom();
+    		return true;
     	}
+    	return false;
     }
     
     public void currentLimiting() {
