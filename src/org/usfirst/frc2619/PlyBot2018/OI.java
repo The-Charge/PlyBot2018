@@ -58,6 +58,7 @@ public class OI {
     public JoystickButton elevateTo1PosBtn;
     public JoystickButton overrideElevatorDownBtn;
     public JoystickButton overrideElevatorUpBtn;
+    public JoystickButton elevateTo5PosBtn;
     public Joystick leftJoystick;
     public JoystickButton shiftHighBtn;
     public JoystickButton shiftLowBtn;
@@ -97,17 +98,19 @@ public class OI {
         shiftHighBtn.whenPressed(new ShiftHigh());
         leftJoystick = new Joystick(0);
         
+        elevateTo5PosBtn = new JoystickButton(leftJoystick, 12);
+        elevateTo5PosBtn.whenPressed(new ElevateToXPos(5));
         overrideElevatorUpBtn = new JoystickButton(leftJoystick, 3);
         overrideElevatorUpBtn.whileHeld(new OverrideElevator(true));
         overrideElevatorDownBtn = new JoystickButton(leftJoystick, 4);
         overrideElevatorDownBtn.whileHeld(new OverrideElevator(false));
-        elevateTo1PosBtn = new JoystickButton(leftJoystick, 9);
+        elevateTo1PosBtn = new JoystickButton(leftJoystick, 8);
         elevateTo1PosBtn.whenPressed(new ElevateToXPos(1));
-        elevateTo2PosBtn = new JoystickButton(leftJoystick, 10);
+        elevateTo2PosBtn = new JoystickButton(leftJoystick, 9);
         elevateTo2PosBtn.whenPressed(new ElevateToXPos(2));
-        elevateTo3PosBtn = new JoystickButton(leftJoystick, 11);
+        elevateTo3PosBtn = new JoystickButton(leftJoystick, 10);
         elevateTo3PosBtn.whenPressed(new ElevateToXPos(3));
-        elevateTo4PosBtn = new JoystickButton(leftJoystick, 12);
+        elevateTo4PosBtn = new JoystickButton(leftJoystick, 11);
         elevateTo4PosBtn.whenPressed(new ElevateToXPos(4));
 
 

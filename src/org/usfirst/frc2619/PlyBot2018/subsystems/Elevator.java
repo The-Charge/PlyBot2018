@@ -143,6 +143,7 @@ public class Elevator extends Subsystem {
     	counter.reset();
     	pos = 0;
     	lastValue = 0;
+    	SmartDashboard.putNumber("ElevatorPosition:", pos);
     }
     
     public void checkLimitSwitches() {
