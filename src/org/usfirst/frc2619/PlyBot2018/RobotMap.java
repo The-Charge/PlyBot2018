@@ -113,7 +113,7 @@ public class RobotMap {
         testCollectorCollector = new PIDController(0.001, 1.0E-5, 0.0, 0.0, testCollectorencoder1, testCollectormotor1, 0.02);
         LiveWindow.addActuator("TestCollector", "Collector", testCollectorCollector);
         testCollectorCollector.setContinuous(false);
-        testCollectorCollector.setAbsoluteTolerance(0.2);
+        testCollectorCollector.setAbsoluteTolerance(10.0);
 
         testCollectorCollector.setOutputRange(-1.0, 1.0);
         SmartDashboard.putData("TestCollector Collector", testCollectorCollector);

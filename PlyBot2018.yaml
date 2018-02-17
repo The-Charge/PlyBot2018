@@ -270,7 +270,7 @@ Children:
           default: '0'
           name: Channel A Channel (Digital)
           validators: *id008
-          value: '5'
+          value: '7'
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
           name: Distance Per Pulse, validators: null, value: 1.0}
         PID Source: !!robotbuilder.data.properties.ChoicesProperty
@@ -292,7 +292,7 @@ Children:
           default: '0'
           name: Channel B Channel (Digital)
           validators: *id012
-          value: '6'
+          value: '8'
       Base: Quadrature Encoder
       Name: Encoder
     - Children: []
@@ -302,12 +302,12 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '7'
+          value: '30'
       Base: Talon SRX
       Name: Motor
     Properties:
       Limit Output: !!robotbuilder.data.properties.BooleanProperty {default: false,
-        name: Limit Output, validators: null, value: true}
+        name: Limit Output, validators: null, value: false}
       D: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: D, validators: null,
         value: 0.0}
       Default command parameters: !!robotbuilder.data.properties.ParametersProperty
@@ -331,7 +331,7 @@ Children:
       Minimum Input: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: Minimum Input,
         validators: null, value: -23000.0}
       Limit Input: !!robotbuilder.data.properties.BooleanProperty {default: false,
-        name: Limit Input, validators: null, value: true}
+        name: Limit Input, validators: null, value: false}
       Minimum Output: !!robotbuilder.data.properties.DoubleProperty {default: -1,
         name: Minimum Output, validators: null, value: -23000.0}
       P: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: P, validators: null,
@@ -366,7 +366,7 @@ Children:
           default: '0'
           name: Channel A Channel (Digital)
           validators: *id008
-          value: '2'
+          value: '10'
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
           name: Distance Per Pulse, validators: null, value: 1.0}
         PID Source: !!robotbuilder.data.properties.ChoicesProperty
@@ -388,7 +388,7 @@ Children:
           default: '0'
           name: Channel B Channel (Digital)
           validators: *id012
-          value: '3'
+          value: '11'
       Base: Quadrature Encoder
       Name: Encoder
     - Children: []
@@ -398,12 +398,12 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '6'
+          value: '31'
       Base: Talon SRX
       Name: Motor
     Properties:
       Limit Output: !!robotbuilder.data.properties.BooleanProperty {default: false,
-        name: Limit Output, validators: null, value: true}
+        name: Limit Output, validators: null, value: false}
       D: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: D, validators: null,
         value: 0.0}
       Default command parameters: !!robotbuilder.data.properties.ParametersProperty
@@ -427,7 +427,7 @@ Children:
       Minimum Input: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: Minimum Input,
         validators: null, value: -23000.0}
       Limit Input: !!robotbuilder.data.properties.BooleanProperty {default: false,
-        name: Limit Input, validators: null, value: true}
+        name: Limit Input, validators: null, value: false}
       Minimum Output: !!robotbuilder.data.properties.DoubleProperty {default: -1,
         name: Minimum Output, validators: null, value: -23000.0}
       P: !!robotbuilder.data.properties.DoubleProperty {default: 1, name: P, validators: null,
@@ -508,7 +508,7 @@ Children:
         F: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: F, validators: null,
           value: 0.0}
         Tolerance: !!robotbuilder.data.properties.DoubleProperty {default: 0.2, name: Tolerance,
-          validators: null, value: 0.2}
+          validators: null, value: 10.0}
         I: !!robotbuilder.data.properties.DoubleProperty {default: 0, name: I, validators: null,
           value: 1.0E-5}
         Period: !!robotbuilder.data.properties.DoubleProperty {default: 0.02, name: Period,
@@ -1615,6 +1615,37 @@ Children:
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: ElevateToXFeet
+  - Children: []
+    Properties:
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value:
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: speed, type: double}
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: TestCollector}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id024
+        - !!robotbuilder.data.properties.ParameterSet
+          name: slowforward
+          parameters:
+          - {name: speed, type: double, value: '0.1'}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: slowreverse
+          parameters:
+          - {name: speed, type: double, value: '-.1'}
+        name: Parameter presets
+        validators: null
+        value: *id024
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Command
+    Name: RunTestCollector
   Properties: {}
   Base: Commands
   Name: Commands
