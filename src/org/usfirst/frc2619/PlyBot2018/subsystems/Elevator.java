@@ -118,6 +118,7 @@ public class Elevator extends Subsystem {
     
     public boolean isPastTarget(int target) {
     	count();
+    	checkLimitSwitches();
     	if ((motor.get()==0)) {
     		return false;
     	}else if (isForward()) {
