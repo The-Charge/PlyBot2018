@@ -104,5 +104,6 @@ public class RobotMap {
 		driveTrainAHRS = new AHRS(Port.kMXP);
 		
         reverseCollectorMotor.setInverted(true);
+        reverseCollectorEncoder.setReverseDirection(true);
     }
 }

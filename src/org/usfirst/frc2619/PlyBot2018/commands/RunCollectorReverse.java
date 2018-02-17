@@ -40,14 +40,15 @@ public class RunCollectorReverse extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	Robot.collector.setVelocityMode();
+    	Robot.collector.setOutput(-.05);
+    	Robot.reverseCollector.setOutput(-.05);
+    	Robot.collector.enable();
+    	Robot.reverseCollector.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	Robot.collector.setOutput(-.1);
-    	Robot.reverseCollector.setOutput(-.1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
