@@ -161,13 +161,5 @@ public class Elevator extends Subsystem {
 		followerMotor.configContinuousCurrentLimit((int) CURRENT_LIMIT, RobotMap.TIMEOUT_MS);
 		followerMotor.enableCurrentLimit(true);
 	}
-    
-    public void writeDashboard() {
-    	SmartDashboard.putNumber("Elevator Current", Robot.elevator.motor.getOutputCurrent());
-        int x = 1;
-        //x = (int) SmartDashboard.getNumber("Set Elevator Pos Testing", 1);
-        //setElevatorPos(x);
-        //count();
-    }
 }
 
