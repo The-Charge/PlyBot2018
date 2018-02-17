@@ -1453,6 +1453,18 @@ Children:
           name: Elevate to 4
           parameters:
           - {name: target, type: int, value: '4'}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: Elevate to 0
+          parameters:
+          - {name: target, type: int, value: '0'}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: Elevate to 5
+          parameters:
+          - {name: target, type: int, value: '5'}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: Elevate to 6
+          parameters:
+          - {name: target, type: int, value: '6'}
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
