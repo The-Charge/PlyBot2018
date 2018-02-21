@@ -72,7 +72,7 @@ public class RobotMap {
         collectorMotor = new WPI_TalonSRX(6);
         
         
-        collectorCubeDetector = new DigitalInput(2);
+        collectorCubeDetector = new DigitalInput(7);
         LiveWindow.addSensor("Collector", "CubeDetector", collectorCubeDetector);
         
         clawSolenoid = new Solenoid(0, 2);

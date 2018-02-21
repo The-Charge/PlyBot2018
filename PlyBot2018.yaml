@@ -130,7 +130,7 @@ Children:
           default: '0'
           name: Input Channel (Digital)
           validators: [DigitalChannel]
-          value: '2'
+          value: '7'
       Base: Digital Input
       Name: CubeDetector
     Properties:

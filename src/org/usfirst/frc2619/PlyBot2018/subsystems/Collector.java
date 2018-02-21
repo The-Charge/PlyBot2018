@@ -64,8 +64,9 @@ public class Collector extends Subsystem {
     public void stop() {
     	RobotMap.collectorMotor.set(0.0);
     }
+    
     public void checkForCube() {
-    	SmartDashboard.putBoolean("CubeInRobot:", cubeDetector.get());
+    	SmartDashboard.putBoolean("CubeInRobot:", !(cubeDetector.get()));
     }
 
 }
