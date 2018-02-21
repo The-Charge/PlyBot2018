@@ -16,6 +16,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -37,6 +38,7 @@ public class RobotMap {
     public static AnalogGyro driveTraindoNotUse;
     public static Solenoid shiftersSolenoid;
     public static WPI_TalonSRX collectorMotor;
+    public static DigitalInput collectorCubeDetector;
     public static Solenoid clawSolenoid;
     public static Encoder elevatorQuadratureEncoder;
     public static WPI_TalonSRX elevatorMotor;
@@ -69,6 +71,9 @@ public class RobotMap {
         
         collectorMotor = new WPI_TalonSRX(6);
         
+        
+        collectorCubeDetector = new DigitalInput(2);
+        LiveWindow.addSensor("Collector", "CubeDetector", collectorCubeDetector);
         
         clawSolenoid = new Solenoid(0, 2);
         LiveWindow.addActuator("Claw", "Solenoid", clawSolenoid);
