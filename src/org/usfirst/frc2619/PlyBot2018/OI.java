@@ -74,9 +74,9 @@ public class OI {
         speedControlBtn = new JoystickButton(rightJoystick, 5);
         speedControlBtn.whileHeld(new SpeedControl());
         runCollectorReverseBtn = new JoystickButton(rightJoystick, 10);
-        runCollectorReverseBtn.whileHeld(new MoveCollector(false, true));
+        runCollectorReverseBtn.whileHeld(new RunCollectorReverse(0.05));
         runCollectorForwardBtn = new JoystickButton(rightJoystick, 9);
-        runCollectorForwardBtn.whileHeld(new MoveCollector(true, false));
+        runCollectorForwardBtn.whileHeld(new RunCollectorForward(0.05));
         closeClawBtn = new JoystickButton(rightJoystick, 8);
         closeClawBtn.whenPressed(new CloseClaw());
         openClawBtn = new JoystickButton(rightJoystick, 7);
@@ -112,8 +112,8 @@ public class OI {
         SmartDashboard.putData("DriveInverted", new DriveInverted());
         SmartDashboard.putData("TurnNDegreesAbsolutePID: 90", new TurnNDegreesAbsolutePID(90));
         SmartDashboard.putData("DriveXSeconds: Drive 2 Seconds, 0.5 Output", new DriveXSeconds(2, 0.5));
-        SmartDashboard.putData("RunCollectorForward", new RunCollectorForward());
-        SmartDashboard.putData("RunCollectorReverse", new RunCollectorReverse());
+        SmartDashboard.putData("RunCollectorForward: Fast", new RunCollectorForward(0.05));
+        SmartDashboard.putData("RunCollectorReverse: Fast", new RunCollectorReverse(0.05));
         SmartDashboard.putData("ToggleLockStraight", new ToggleLockStraight());
         SmartDashboard.putData("OpenClaw", new OpenClaw());
         SmartDashboard.putData("CloseClaw", new CloseClaw());
