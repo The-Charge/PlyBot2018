@@ -144,7 +144,15 @@ public class DriveTrain extends Subsystem {
 
     public void run(double leftSpeed, double rightSpeed) {
     	setPercentVBus();
-    	if (driveLocked) {
+    	if (RobotMap.driveTrainAHRS.getPitch() > 30) {	//in degrees, adjustable
+    		leftFrontMotor.set(-0.5);
+    		rightFrontMotor.set(-0.5);
+    	}
+    	else if (RobotMap.driveTrainAHRS.getPitch() < 30) {	//in degrees, adjustable
+    		leftFrontMotor.set(0.5);
+    		leftFrontMotor.set(0.5);
+    	}	
+    	else if (driveLocked) {
 			double avSpeed = (leftSpeed + rightSpeed) / 2.0;
 			leftSpeed = avSpeed;
 			rightSpeed = avSpeed;
