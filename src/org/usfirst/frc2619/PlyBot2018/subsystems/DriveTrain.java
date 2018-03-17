@@ -148,9 +148,9 @@ public class DriveTrain extends Subsystem {
     		leftFrontMotor.set(-0.5);
     		rightFrontMotor.set(-0.5);
     	}
-    	else if (RobotMap.driveTrainAHRS.getPitch() < 30) {	//in degrees, adjustable
+    	else if (RobotMap.driveTrainAHRS.getPitch() < -30) {	//in degrees, adjustable
     		leftFrontMotor.set(0.5);
-    		leftFrontMotor.set(0.5);
+    		rightFrontMotor.set(0.5);
     	}	
     	else if (driveLocked) {
 			double avSpeed = (leftSpeed + rightSpeed) / 2.0;
